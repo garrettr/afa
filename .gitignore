@@ -1,0 +1,18 @@
+# Ignore sqlite database files
+*.db
+
+# Ignore Vim swap files
+*.swp
+
+# Ignore Python bytecode
+*.pyc
+
+# Ignore Apple Computer
+.DS_Store
+
+# Ignore local (deployment) settings.py
+local_settings.py
+
+# Ignore collected dir for testing staticfiles
+collected
+
