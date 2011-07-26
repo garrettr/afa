@@ -1,5 +1,8 @@
 # Django settings for afa project.
 
+#import sys
+#sys.path.append('/Users/grobinso/Documents/code')
+
 import os
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -72,7 +75,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "admin/"
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -128,6 +131,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+
+    'feincms',
+    'feincms.module.page',
+    'mptt',
+    'afa',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -158,3 +166,7 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+FEINCMS_RICHTEXT_INIT_CONTEXT = {
+    'TINYMCE_JS_URL': '/static/js/tiny_mce/tiny_mce.js',
+}
