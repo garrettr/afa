@@ -18,3 +18,17 @@ Dependencies:
 1. feincms
 2. django-mptt
 3. PIL
+4. django-photologue-2.2
+
+## Todo
+Going to try incorporating django-photologue as the image
+manipulation/gallery solution.
+Configuring django-photologue:
+
+1.  Add 'photologue' to INSTALLED_APPS
+2.  syncdb, THEN `python manage.py plinit`
+3.  (OPTIONAL) Add photologue urls:
+    (r'^photologue/', include('photolgue.urls')), 
+4.  Copy templates to templates/photologue
+
+
