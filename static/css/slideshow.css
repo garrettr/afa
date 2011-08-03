@@ -1,0 +1,77 @@
+#slides { position:relative; width:960px; margin:0 auto; }
+
+.slides_container {
+    width:960px;
+    height:252px;
+  }
+  .slides_container div {
+    width:960px;
+    height:252px;
+    display:block;
+  }
+
+/*
+    Caption
+*/
+
+.slides_container .caption {
+    position:absolute;
+    bottom:28px; right:40px;
+    width:auto;
+    height:auto;
+    padding:12px;
+    color:white; background:rgba(0,0,0,0.7);
+}
+
+.caption h2, h3 { color: #499DF2; }
+
+/*
+	Next/prev buttons
+*/
+
+#slides .next,#slides .prev {
+	position:absolute;
+	top:110px;
+	left:-12px;
+	width:24px;
+	height:35px;
+	display:block;
+	z-index:101;
+}
+
+#slides .next {
+	left:948px;
+}
+
+/*
+	Pagination
+*/
+
+.pagination {
+	margin:-30px auto 0;
+	width:100px;
+    position:relative;  /* needed for z-index to take effect! */
+    z-index:101;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background-image:url(../img/pagination.png);
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
+

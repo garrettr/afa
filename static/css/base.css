@@ -1,0 +1,146 @@
+html {
+  /* font: 14px/1.4 Cambria, Georgia, "Times New Roman", serif;*/
+  /* "magic number" = 14 * 1.5 = 21px */
+  font: 14px/1.5 "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+  color: #333;
+}
+
+body {
+  background-color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444;
+  margin-bottom: 21px;
+  font-weight: bold;
+}
+
+#wrap { min-height: 100%; }
+#stripe {
+    background-color:white;
+    color:#333;
+    font-weight:bold;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+#stripe p { padding-top:5px; }
+
+#header { position:relative; margin-bottom:48px;}
+#stripe { position:absolute; top:21px; z-index:105; width:960px; margin:0 auto; 
+    /*box-shadow: 0px 5px rgba(0,0,0,0.8); haaaaaaaa */
+}
+
+#content {
+    padding-top:5px;
+    min-height: 100%;
+    background:white;
+}
+
+/*
+    ---- HEADERS ----
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  color: #555;
+  /* serif for the headers - nice contrast */
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  margin-bottom: 21px;
+  font-weight: bold;
+}
+
+h1 {
+  color: #63A2E6;
+  font-size: 3em; /* 42px --> 42 ÷ 14 = 3 */
+  line-height: 2em; /* 42px --> 42 ÷ 24 = 2 */
+}
+
+h2 {
+  font-size: 1.375em; /* 22px --> 22 ÷ 16 = 1.375 */
+  line-height: 1.0909em; /* 24px --> 24 ÷ 22 = 1.090909(09) */
+}
+
+h3 {
+  font-size: 1.25em; /* 20px --> 20 ÷ 16 = 1.25 */
+  line-height: 1.2em; /* 24px --> 24 ÷ 20 = 1.2 */
+}
+
+h4 {
+  font-size: 1.125em; /* 18px --> 18 ÷ 16 = 1.125 */
+  line-height: 1.333em; /* 24px --> 24 ÷ 18 = 1.3333333(3) */
+}
+
+h5, h6 {
+  font-size: 1em; /* 16px --> 16 ÷ 16 = 1 */
+  line-height: 1.5em; /* 24px --> 24 ÷ 16 = 1.5 */
+}
+
+body > p:first-of-type {
+  font-size: 1.125em;
+    /* 18px → 18 ÷ 16 = 1.125 */
+
+  line-height: 1.333em;
+    /* 24px → 24 ÷ 18 = 1.3333(3) */
+}
+
+/* this DOESN'T work if it's before the previous statement
+ * why? seems really weird
+ */
+#content p {
+    margin-bottom: 21px;
+}
+
+#content #main h1,h2,h3,h4,h5,h6 {
+    margin-bottom:20px; /* accomodate the border */
+    border-bottom: #888 1px dotted;
+}
+
+
+/*
+    ---- NEWSFEED ----
+*/
+#newsfeed ol {
+   list-style-type:none; 
+}
+#newsfeed ol li {
+    display:block;
+    background:#ddd;
+    border-radius:8px;
+    padding:10px;
+    margin-bottom:6px;
+    font-size:12px;
+    background:
+    -moz-box-shadow: 0 0 3px #888;
+    -webkit-box-shadow: 0 0 3px #888;
+    box-shadow: 0 0 3px #888;
+}
+
+#newsfeed ol li p img { float: right; }
+#newsfeed p { margin-bottom:0; }
+
+/*
+    ---- SIDENAV ----
+*/
+#sidebar ol { list-style-type: none; }
+#sidebar ol ol > li.active { font-weight:bold; }
+#sidebar ol ol > li.active:after { content: " >"; }
+#sidebar ul ul,
+#sidebar ol ol {
+    margin: 0 0 0 20px;
+}
+
+/*
+    ---- FOOTER ----
+*/
+div#footer {
+      /* serif for the headers - nice contrast */
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    background-color:#333;
+    color:white;
+    margin-top:21px;
+    padding:10px 0;
+    border-radius: 10px 10px 0 0;
+}
+#footer a { color: #499DF2; }
+
+#left { float:left; position:absolute; left:-10px; top:-1px;}
+#right { float:right; position:absolute; right:-10px; top:-1px;}
