@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'mptt',
     'photologue',
     'afa',
+    'feedit',
 )
 
 # A sample logging configuration. The only tangible logging

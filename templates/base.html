@@ -27,8 +27,25 @@
         });
       });
     </script>
-
+    <!-- so.what.social -->
+    <script src="{{STATIC_URL}}js/jquery.jsonp-2.1.4.js" type="text/javascript"></script>
+    <script src="{{STATIC_URL}}js/so.what.social.js" type="text/javascript"></script>
+    {% load feedit_tags %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#activityFeed").soWhatSocial({
+                "feeds": {% get_feed_list %},
+                "icons": {
+                    "rss": "{{STATIC_URL}}img/rss_21.png",
+                    "facebook": "{{STATIC_URL}}img/facebook_21.png",
+                    "twitter": "{{STATIC_URL}}img/twitter_21.png"
+                  }
+                // custom settings...
+            });
+        });
+    </script>
   </head>
+
   <body>
     <div id="wrap">
 
@@ -112,23 +129,9 @@
 
         <div id="newsfeed" class="grid_4">
           <h2>News Feed</h2> 
-          <ol> 
-            <li> 
-            <p><img src="{{STATIC_URL}}img/facebook_21.png" /><strong>Appalshop</strong></p>
-            <p><em>Posted: Just now</em></p> 
-            <p>"Another great video from the Appalshop Archives..."</p> 
-            </li> 
-            <li> 
-            <p><img src="{{STATIC_URL}}img/rss_21.png" /><strong>Kentuckians for the Commonwealth</strong></p>
-            <p><em>Posted: Yesterday</em></p> 
-            <p>"Festival Season Hits Lexington: As soon as summer hit, the Central Kentucky chapter has been out and about talking to folks about our work. On June 25th..."</p> 
-            </li> 
-            <li> 
-            <p><img src="{{STATIC_URL}}img/twitter_21.png" /><strong>Appalshop</strong></p>
-            <p><em>Posted: 2 days ago</em></p> 
-            <p>"For more info about the Appalshop screenings at MoMA in NYC on Feb 19-20 go to..."</p> 
-            </li> 
-          </ol> 
+          <div id="activityFeed">
+            <img id="loading" src="{{STATIC_URL}}img/ajax-loading.gif" />
+          </div>
         </div>
 
       </div>
