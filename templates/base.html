@@ -110,6 +110,7 @@
 
       <div id="content" class="container_16 clearfix">
 
+          {% comment %}
         <div id="sidebar" class="grid_3">
           {% feincms_navigation of feincms_page as sublevel level=2 %}
           {% for p in sublevel %}
@@ -122,8 +123,9 @@
 
           {% feincms_render_region feincms_page "sidebar" request %}
         </div>
+          {% endcomment %}
 
-        <div id="main" class="grid_9">
+        <div id="main" class="grid_12">
           {% feincms_render_region feincms_page "main" request %}
         </div>
 
