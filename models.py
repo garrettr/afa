@@ -4,8 +4,12 @@ from feincms.module.page.models import Page
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.image.models import ImageContent
 from feincms.content.raw.models import RawContent
-from feincms.content.medialibrary.models import MediaFileContent
+from feincms.content.medialibrary.v2 import MediaFileContent
+from feincms.content.section.models import SectionContent
+from feincms.content.table.models import TableContent
 from feincms.content.application.models import ApplicationContent
+
+Page.register_extensions('titles',)
 
 Page.register_templates({
     'key': 'base',
@@ -18,12 +22,12 @@ Page.register_templates({
     })
 
 Page.create_content_type(RichTextContent)
-MediaFileContent.default_create_content_type(Page)
 Page.create_content_type(RawContent)
-Page.create_content_type(ImageContent, POSITION_CHOICES=(
-    ('block', _('block')),
-    ('left', _('left')),
-    ('right', _('right')),
+Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
+    ('what', 'is this'),
+    ))
+Page.create_content_type(SectionContent, TYPE_CHOICES=(
+    ('I', "don't get it"),
     ))
 
 from django.db import models
