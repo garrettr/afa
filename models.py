@@ -9,8 +9,6 @@ from feincms.content.section.models import SectionContent
 from feincms.content.table.models import TableContent
 from feincms.content.application.models import ApplicationContent
 
-Page.register_extensions('titles',)
-
 Page.register_templates({
     'key': 'base',
     'title': 'Base Template',
@@ -81,3 +79,5 @@ class GalleryContent(models.Model):
 
 Page.create_content_type(PhotoContent)
 Page.create_content_type(GalleryContent)
+
+Page.register_extensions('accent',)

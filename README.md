@@ -31,4 +31,7 @@ Configuring django-photologue:
     (r'^photologue/', include('photolgue.urls')), 
 4.  Copy templates to templates/photologue
 
+Added accents.py:
+/Users/grobinso/Documents/code/virtualenv/python-envs/feincms/lib/python2.6/site-packages/feincms/module/page/extensions/accent.py
 
+This is a FeinCMS Page Extension. I'm keeping it in the repo - there's a symlink from the above path to the file in this git repo.
