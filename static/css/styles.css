@@ -128,3 +128,18 @@ h1, h2, h3, h4, h5, h6 {
 #content { margin-top: 18px; }
 
 p { margin-bottom:21px; }
+
+/*
+    ---- FOOTER ----
+*/
+div#footer {
+    margin-top:42px;
+      /* serif for the headers - nice contrast */
+      font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    background-color:#333;
+    color:white;
+    padding:10px 0;
+    border-radius: 10px 10px 0 0;
+}
+#footer a { color: #499DF2; }
+
