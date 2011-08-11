@@ -1,0 +1,130 @@
+html {
+  font: 16px/1.5 "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+  color: #333;
+}
+
+body {
+}
+
+#stripe {  
+  border-top:5px solid #a2e663;
+  width:100%;
+}
+
+#top-nav { 
+  height:42px;
+}
+
+.nav {
+  list-style:none;
+  font-weight:bold;
+  position:relative;
+  z-index:5;
+}
+
+.nav li {
+  float:left;
+  position:relative;
+}
+
+.nav a {
+  display:block;
+  color:#333;
+  background:white;
+  text-decoration:none;
+}
+
+.nav a:hover {
+}
+
+#top {
+  float:right;
+}
+#top li {
+}
+#top a {
+  padding:15px 20px 5px 5px;
+}
+#top a:hover {
+  background: #a2e663;
+  color:white;
+}
+#top .active {
+  background: #a2e663;
+}
+
+#sub {
+width:100%;
+clear:right;
+}
+#sub li {
+  margin-top:5px;
+}
+#sub a {
+  padding:5px 10px 5px 10px;
+}
+#sub a:hover {
+  color: #555;
+  color: #a23663;
+}
+#sub .active {
+  margin-top:0px;
+  border-top: #a2e663 solid 5px;
+}
+
+
+#header {
+  background:url('../img/head-creek.jpg');
+  position:relative;
+  margin-top:10px;
+  border-bottom:5px #ccc solid;
+}
+
+#header-text {
+  background:rgba(255,255,255,0.5);
+  padding: 5px 8px;
+}
+
+
+h1 {
+  font-size: 3em;
+  line-height: 1.75em;
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 1.33333em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #222;
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+
+/*
+    ---- NEWSFEED ----
+*/
+#newsfeed ol {
+   list-style-type:none; 
+}
+#newsfeed ol li {
+    display:block;
+    background:#ddd;
+    border-radius:8px;
+    padding:10px;
+    margin-bottom:6px;
+    font-size:12px;
+    background:
+    -moz-box-shadow: 0 0 3px #888;
+    -webkit-box-shadow: 0 0 3px #888;
+    box-shadow: 0 0 3px #888;
+}
+
+#newsfeed ol li p img { float: right; }
+#newsfeed p { margin-bottom:0; }
+
+#content { margin-top: 18px; }
+
+p { margin-bottom:21px; }
