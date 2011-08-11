@@ -17,6 +17,7 @@ body {
 
 .nav {
   list-style:none;
+  font-size:16px;
   font-weight:bold;
   position:relative;
   z-index:5;
