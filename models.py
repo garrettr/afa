@@ -22,10 +22,10 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 Page.create_content_type(RawContent)
 Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
-    ('what', 'is this'),
+    ('default', _('Default')),
     ))
 Page.create_content_type(SectionContent, TYPE_CHOICES=(
-    ('I', "don't get it"),
+    ('default', _("Default")),
     ))
 
 from django.db import models
