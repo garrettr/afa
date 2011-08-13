@@ -67,6 +67,14 @@ def register(cls, admin_cls):
     def content_subtitle(self):
         return u'\n'.join(self._content_title.splitlines()[1:])
 
+    @monkeypatch_property(cls)
+    def header_image(self):
+        return self._header_image.photo
+
+    @monkeypatch_property(cls)
+    def accent_color(self):
+        return self._accent_color
+
     admin_cls.fieldsets.append((_('Accent'), {
         'fields': ('_content_title', '_header_image', '_accent_color',),
         'classes': ('collapse',),
