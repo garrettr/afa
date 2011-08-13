@@ -65,7 +65,7 @@ def register(cls, admin_cls):
 
     @monkeypatch_property(cls)
     def content_subtitle(self):
-        return u'\n'.join(self._content_title.splitlines()[1:])
+        return mark_safe(u'<br />'.join(self._content_title.splitlines()[1:]))
 
     @monkeypatch_property(cls)
     def header_image(self):

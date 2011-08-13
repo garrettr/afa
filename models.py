@@ -17,7 +17,36 @@ Page.register_templates({
         ('main', 'Main region'),
         ('sidebar', 'Sidebar', 'inherited'),
         ),
-    })
+    },
+    {
+    'key': 'main-sidebar',
+    'title': 'Main -> Sidebar',
+    'path': 'main-sidebar.html',
+    'regions': (
+        ('main', 'Main region'),
+        ('sidebar', 'Sidebar', 'inherited'),
+        ),
+    },
+    {
+    'key': 'sidebar-main',
+    'title': 'Sidebar -> Main',
+    'path': 'sidebar-main.html',
+    'regions': (
+        ('sidebar', 'Sidebar', 'inherited'),
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'three-col',
+    'title': 'Three Column',
+    'path': '3col.html',
+    'regions': (
+        ('leftcol', 'Left Column'),
+        ('centercol', 'Center Column'),
+        ('rightcol', 'Right Column'),
+        )
+    },
+)
 
 Page.create_content_type(RichTextContent)
 Page.create_content_type(RawContent)
