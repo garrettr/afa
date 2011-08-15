@@ -57,4 +57,56 @@ Page.create_content_type(SectionContent, TYPE_CHOICES=(
     ('default', _("Default")),
     ))
 
+from django.db import models
+from django.template.loader import render_to_string
+from photologue.models import Gallery, Photo, PhotoSize
+
+class PhotoContent(models.Model):
+    '''
+    A single photo from a Photologue gallery
+    '''
+    photo = models.ForeignKey(Photo, verbose_name=_(u'Photo'))
+    size = models.ForeignKey(PhotoSize, verbose_name=_(u'Size'))
+
+    class Meta:
+        abstract = True
+        verbose_name = _(u'Photo')
+        verbose_name_plural = _(u'Photos')
+
+    def render(self, **kwargs):
+        photosize = self.size
+
+        if not self.photo.size_exists(photosize):
+            self.photo.create_size(photosize)
+        if photosize.increment_count:
+            self.photo.increment_count()
+        url_for_size = '/'.join([
+            self.photo.cache_url(),
+            self.photo._get_filename_for_size(photosize.name)
+        ])
+
+        return render_to_string('photologue/photo_content.html',
+                {
+                    'photo': self.photo,
+                    'url_for_size': url_for_size,
+                })
+
+class GalleryContent(models.Model):
+    gallery = models.ForeignKey(Gallery, verbose_name=_(u'Gallery'))
+
+    class Meta:
+        abstract = True
+        verbose_name = _(u'Gallery')
+        verbose_name_plural = _(u'Galleries')
+
+    def render(self, **kwargs):
+        return render_to_string('photologue/gallery_embed.html',
+                {
+                    'gallery': self.gallery
+                }
+            )
+
+Page.create_content_type(PhotoContent)
+Page.create_content_type(GalleryContent)
+
 Page.register_extensions('accent',)
