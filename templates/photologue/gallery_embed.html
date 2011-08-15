@@ -1,0 +1,24 @@
+
+<div id="{{ gallery.title }}">
+</div>
+
+<script>
+var {{ gallery.title }}_data = [
+{% for photo in gallery.public %}
+    {
+        image: '{{ photo.get_display_url }}',
+        thumb: '{{ photo.get_thumbnail_url }}',
+        big: '',
+        title: '{{ photo.title }}',
+        description: '{{ photo.caption }}'
+    },
+{% endfor %}
+]
+
+$(document).ready(function() {
+    $('#{{ gallery.title }}').galleria({
+        data_source: {{ gallery.title }}_data,
+        height: 420
+    });
+});
+</script>
