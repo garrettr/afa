@@ -81,6 +81,8 @@
             </div>
           </div>
 
+          {% block content %}
+
           <div id="content" class="container_12">
             <div id="main" class="grid_8">
               {% feincms_render_region feincms_page "main" request %}
@@ -94,6 +96,8 @@
               {% feincms_render_region feincms_page "sidebar" request %}
             </div>
           </div>
+
+          {% endblock %}
 
           <div id="footer" class="container_16 clearfix">
             <div id="footer-content" class="grid_16">

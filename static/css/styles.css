@@ -55,8 +55,8 @@ body {
 }
 
 #sub {
-width:100%;
-clear:right;
+  width:100%;
+  clear:right;
 }
 #sub li {
   margin-top:5px;
@@ -79,12 +79,32 @@ clear:right;
   position:relative;
   margin-top:10px;
   border-bottom:5px #ccc solid;
+  height:210px;
 }
 
 #header-text {
-  color:black;
-  background:rgba(255,255,255,0.5);
-  padding: 6px 8px;
+  background:rgba(0,0,0,0.5);
+  padding: 8px 16px;
+  position:absolute;
+  top: 28px;
+  left: 18px;
+}
+
+#header-text h1, #header-text h2 {
+  font-family: Baskerville, serif;
+  color:#dedede;
+}
+
+#header-text h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  font-weight:normal;
+}
+
+#header-text h2 {
+  font-size: 2em;
+  line-height: 1em;
+  font-weight:normal;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -93,24 +113,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-#header-text h1 {
-  font-size: 3.25em;
-  line-height: 1.75em;
-}
-
-#header-text h2 {
-  font-size: 2em;
-  line-height: 1em;
-  font-style: italic;
-  font-weight:normal;
-}
 
 h1 {
 }
 
 h2 {
   /* font-size: 24 / 14 = size in ems
-     21 / 24 = line height */
+  21 / 24 = line height */
   /* 24px */
   font-size: 1.714285em;
   line-height: 0.875em;
@@ -125,22 +134,22 @@ h3 {
 
 
 /*
-    ---- NEWSFEED ----
-*/
-#newsfeed ol {
-   list-style-type:none; 
+---- NEWSFEED ----
+ */
+  #newsfeed ol {
+    list-style-type:none; 
 }
 #newsfeed ol li {
-    display:block;
-    background:#ddd;
-    border-radius:8px;
-    padding:10px;
-    margin-bottom:6px;
-    font-size:12px;
-    background:
-    -moz-box-shadow: 0 0 3px #888;
-    -webkit-box-shadow: 0 0 3px #888;
-    box-shadow: 0 0 3px #888;
+  display:block;
+  background:#ddd;
+  border-radius:8px;
+  padding:10px;
+  margin-bottom:6px;
+  font-size:12px;
+  background:
+  -moz-box-shadow: 0 0 3px #888;
+  -webkit-box-shadow: 0 0 3px #888;
+  box-shadow: 0 0 3px #888;
 }
 
 #newsfeed ol li p img { float: right; }
@@ -151,12 +160,12 @@ h3 {
 p { margin-bottom:21px; }
 
 /*
-    ---- FOOTER ----
-*/
-div#footer {
+---- FOOTER ----
+ */
+  div#footer {
     margin-top:42px;
-      /* serif for the headers - nice contrast */
-      font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    /* serif for the headers - nice contrast */
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     background-color:#333;
     color:white;
     padding:10px 0;
