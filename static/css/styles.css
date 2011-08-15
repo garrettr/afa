@@ -6,6 +6,8 @@ html {
 body {
 }
 
+img { height:auto; max-width: 100%; }
+
 #stripe {  
   border-top:5px solid #a2e663;
   width:100%;
