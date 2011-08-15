@@ -155,7 +155,7 @@ h3 {
 #newsfeed ol li p img { float: right; }
 #newsfeed p { margin-bottom:0; }
 
-#content { margin-top: 21px; }
+#content { margin-top: 21px; min-height:100%; }
 
 p { margin-bottom:21px; }
 
