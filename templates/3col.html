@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load applicationcontent_tags feincms_tags feincms_page_tags %}
+
+{% block content %}
+<div id="content" class="container_12">
+    <div id="leftcol" class="grid_4">
+        {% feincms_render_region feincms_page "leftcol" request %}
+    </div>
+    <div id="centercol" class="grid_4">
+        {% feincms_render_region feincms_page "centercol" request %}
+    </div>
+    <div id="rightcol" class="grid_4">
+        {% feincms_render_region feincms_page "rightcol" request %}
+    </div>
+</div>
+{% endblock %}
