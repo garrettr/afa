@@ -57,4 +57,57 @@ Page.create_content_type(SectionContent, TYPE_CHOICES=(
     ('default', _("Default")),
     ))
 
+from django.db import models
+from feincms.module.medialibrary.models import MediaFile
+from feincms.module.medialibrary.fields import MediaFileForeignKey
+from feincms.admin.item_editor import FeinCMSInline
+from django.template.loader import render_to_string
+
+class ImageContentInline(FeinCMSInline):
+    raw_id_fields = ('image',)
+
+class ImageContent(models.Model):
+    feincms_item_editor_inline = ImageContentInline
+
+    image = MediaFileForeignKey(MediaFile)
+    caption = models.TextField(blank=True)
+    link = models.URLField(max_length=200, blank=True,
+            help_text=_(u'Leave blank for no link'))
+
+    SIZE_CHOICES = (
+        # based on 960.gs
+        (u'60x60', u'thumbnail'),
+        (u'220x9999', u'small'),
+        (u'300x9999', u'medium'),
+        (u'460x9999', u'large'),
+    )
+
+    # do alignment as well
+    size = models.CharField(max_length=9, choices=SIZE_CHOICES, blank=True,
+            null=True,
+            help_text=_(u'Leave blank to use original image size'))
+
+    ALIGN_CHOICES = (
+        (0, u'Center (block)'),
+        (1, u'Left'),
+        (2, u'Right'),
+    )
+    align = models.IntegerField(choices=ALIGN_CHOICES, default=0)
+
+    class Meta:
+        abstract = True
+
+    def render(self, **kwargs):
+        return render_to_string('content/image.html',
+                {
+                    'image': self.image,
+                    'caption': self.caption,
+                    'link': self.link,
+                    'size': self.size,
+                    'align': self.align,
+                }
+            )
+
+Page.create_content_type(ImageContent)
+
 Page.register_extensions('accent',)
