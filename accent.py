@@ -3,8 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from feincms._internal import monkeypatch_property
 
-from afa.models import PhotoContent
-from photologue.models import Gallery, Photo, PhotoSize
 from feincms.content.medialibrary.v2 import MediaFileContent
 
 from django import forms
@@ -46,7 +44,7 @@ class ColorField(models.CharField):
 def register(cls, admin_cls):
     cls.add_to_class('_content_title', models.TextField(_('content title'), blank=True,
         help_text=_('The first line is the main title, the following lines are subtitles.')))
-    cls.add_to_class('_header_image', models.ForeignKey(Photo, blank=True, null=True,
+    cls.add_to_class('_header_image', models.ForeignKey('MediaFileContent', blank=True, null=True,
         help_text=_('Link to an image to use for the page header')))
     cls.add_to_class('_accent_color', ColorField(_('accent color'), blank=True,
         default="#ffffff",

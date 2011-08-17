@@ -175,3 +175,22 @@ p { margin-bottom: 21px; }
 }
 #footer a { color: #499DF2; }
 
+/*
+ * Images
+ */
+
+.image { position:relative; display:inline-block; }
+.image p { margin-bottom:0; }
+.image img { margin-bottom:5px; }
+#center-block { margin: 0 auto; margin-bottom:21px; }
+#left { float: left; margin: 5px 15px 5px 0px; clear:both; }
+#right { float: right; margin: 5px 0px 5px 15px; clear:both; }
+.caption {
+    position:absolute;
+    bottom:5px;
+    right:0;
+    padding:5px;
+    color:white;
+    font-size:12px;
+    background:rgba(0,0,0,0.5);
+}

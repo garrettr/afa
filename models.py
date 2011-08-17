@@ -49,50 +49,71 @@ Page.register_templates({
 )
 
 Page.create_content_type(RichTextContent)
-Page.create_content_type(RawContent)
-Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
-    ('default', _('Default')),
-    ))
-Page.create_content_type(SectionContent, TYPE_CHOICES=(
-    ('default', _("Default")),
-    ))
 
 from django.db import models
+from feincms.module.medialibrary.models import MediaFile
+from feincms.module.medialibrary.fields import MediaFileForeignKey
+from feincms.admin.item_editor import FeinCMSInline
 from django.template.loader import render_to_string
-from photologue.models import Gallery, Photo, PhotoSize
 
-class PhotoContent(models.Model):
-    '''
-    A single photo from a Photologue gallery
-    '''
-    photo = models.ForeignKey(Photo, verbose_name=_(u'Photo'))
-    size = models.ForeignKey(PhotoSize, verbose_name=_(u'Size'))
+class ImageContentInline(FeinCMSInline):
+    raw_id_fields = ('image',)
+
+class ImageContent(models.Model):
+    feincms_item_editor_inline = ImageContentInline
+
+    image = MediaFileForeignKey(MediaFile)
+    caption = models.TextField(blank=True)
+    link = models.URLField(max_length=200, blank=True,
+            help_text=_(u'Leave blank for no link'))
+
+    SIZE_CHOICES = (
+        # based on 960.gs
+        (u'60x60', u'thumbnail'),
+        (u'220x9999', u'small'),
+        (u'300x9999', u'medium'),
+        (u'460x9999', u'large'),
+    )
+
+    # do alignment as well
+    size = models.CharField(max_length=9, choices=SIZE_CHOICES, blank=True,
+            null=True,
+            help_text=_(u'Leave blank to use original image size'))
+
+    ALIGN_CHOICES = (
+        (0, u'Center (block)'),
+        (1, u'Left'),
+        (2, u'Right'),
+    )
+    align = models.IntegerField(choices=ALIGN_CHOICES, default=0)
 
     class Meta:
         abstract = True
-        verbose_name = _(u'Photo')
-        verbose_name_plural = _(u'Photos')
+        verbose_name = _(u'Image')
 
     def render(self, **kwargs):
-        photosize = self.size
-
-        if not self.photo.size_exists(photosize):
-            self.photo.create_size(photosize)
-        if photosize.increment_count:
-            self.photo.increment_count()
-        url_for_size = '/'.join([
-            self.photo.cache_url(),
-            self.photo._get_filename_for_size(photosize.name)
-        ])
-
-        return render_to_string('photologue/photo_content.html',
+        return render_to_string('content/image.html',
                 {
-                    'photo': self.photo,
-                    'url_for_size': url_for_size,
-                })
+                    'image': self.image,
+                    'caption': self.caption,
+                    'link': self.link,
+                    'size': self.size,
+                    'align': self.align,
+                }
+            )
+
+Page.create_content_type(ImageContent)
+
+from sortedm2m.fields import SortedManyToManyField
+from django.contrib import admin
 
 class GalleryContent(models.Model):
-    gallery = models.ForeignKey(Gallery, verbose_name=_(u'Gallery'))
+
+    title = models.CharField(max_length=200)
+    images = models.ManyToManyField(MediaFile)
+
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         abstract = True
@@ -100,13 +121,19 @@ class GalleryContent(models.Model):
         verbose_name_plural = _(u'Galleries')
 
     def render(self, **kwargs):
-        return render_to_string('photologue/gallery_embed.html',
+        return render_to_string('gallery/gallery.html',
                 {
-                    'gallery': self.gallery
+                    'title': self.title,
+                    'images': self.images.all(),
                 }
             )
 
-Page.create_content_type(PhotoContent)
+
 Page.create_content_type(GalleryContent)
+
+Page.create_content_type(RawContent)
+Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
+    ('default', _('Default')),
+    ))
 
 Page.register_extensions('accent',)

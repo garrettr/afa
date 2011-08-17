@@ -1,0 +1,12 @@
+{% load feincms_thumbnail %}
+<div class="image" id="{% if align == 0 %}center-block{% else %}{% if align == 1 %}left{% else %}{% if align == 2 %}right{% endif %}{% endif %}{% endif %}">
+    {% if link %}<a href="{{link}}">{% endif %}
+    {% if size %}
+    <img src="{{ image.file|thumbnail:size }}" alt="{{ caption }}" />
+    {% else %}
+    <img src="{{ image.file.url }}" alt="{{ caption }}"/>
+    {% endif %}
+    {% if link %}</a>{% endif %}
+
+{% if caption %}<p class="caption">{{ caption }}</p>{% endif %}
+</div>
