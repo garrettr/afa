@@ -49,13 +49,6 @@ Page.register_templates({
 )
 
 Page.create_content_type(RichTextContent)
-Page.create_content_type(RawContent)
-Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
-    ('default', _('Default')),
-    ))
-Page.create_content_type(SectionContent, TYPE_CHOICES=(
-    ('default', _("Default")),
-    ))
 
 from django.db import models
 from feincms.module.medialibrary.models import MediaFile
@@ -96,6 +89,7 @@ class ImageContent(models.Model):
 
     class Meta:
         abstract = True
+        verbose_name = _(u'Image')
 
     def render(self, **kwargs):
         return render_to_string('content/image.html',
@@ -109,5 +103,10 @@ class ImageContent(models.Model):
             )
 
 Page.create_content_type(ImageContent)
+
+Page.create_content_type(RawContent)
+Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
+    ('default', _('Default')),
+    ))
 
 Page.register_extensions('accent',)
