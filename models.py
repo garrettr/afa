@@ -104,6 +104,33 @@ class ImageContent(models.Model):
 
 Page.create_content_type(ImageContent)
 
+from sortedm2m.fields import SortedManyToManyField
+from django.contrib import admin
+
+class GalleryContent(models.Model):
+
+    title = models.CharField(max_length=200)
+    images = models.ManyToManyField(MediaFile)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        abstract = True
+        verbose_name = _(u'Gallery')
+        verbose_name_plural = _(u'Galleries')
+
+    def render(self, **kwargs):
+        return render_to_string('gallery/gallery.html',
+                {
+                    'title': self.title,
+                    'images': self.images.all(),
+                }
+            )
+
+
+Page.create_content_type(GalleryContent)
+
 Page.create_content_type(RawContent)
 Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('default', _('Default')),

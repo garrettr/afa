@@ -1,0 +1,25 @@
+<div id="{{ title }}_gallery">
+</div>
+
+<style>
+    #{{ title}}_gallery { height:420px; }
+</style>
+
+{% load feincms_thumbnail %}
+<script>
+    var {{title}}_data = [
+    {% for image in images %}
+    {
+        image: '{{ image.file.url }}',
+        thumb: '{{ image.file|thumbnail:"50x50" }}',
+        title: '{{ image.translation.title }}',
+        description: '{{ image.translation.caption }}',
+    },
+    {% endfor %}
+    ]
+
+    $('#{{ title }}_gallery').galleria({
+        data_source: {{ title }}_data,
+        height:420
+    });
+</script>
