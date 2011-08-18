@@ -16,6 +16,12 @@
       #header { background:url({{feincms_page.header_image|cropscale:"960x210"}}) }
       {% endif %}
       {% if feincms_page.accent_color %}
+      a { color: {{ feincms_page.accent_color }}; text-decoration:none;}
+      a:hover { text-decoration:underline; }
+      #stripe { border-top: 5px solid {{ feincms_page.accent_color }}; }
+      #top a:hover { background: {{ feincms_page.accent_color }}; }
+      #top .active { background: {{ feincms_page.accent_color }}; }
+      #sub .active { border-top: {{ feincms_page.accent_color }} solid 5px; padding-top:2px;}
       {% endif %}
     </style>
 
@@ -60,7 +66,7 @@
                 {% feincms_navigation of feincms_page as toplevel level=1 %}
                 {% for p in toplevel %}
                 <li>
-                <a {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                <a style="background: {{ p.accent_color }}" {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a>
                 </li>
                 {% endfor %}
               </ul>
@@ -89,23 +95,7 @@
             </div>
           </div>
 
-          {% block content %}
-
-          <div id="content" class="container_12">
-            <div id="main" class="grid_8">
-              {% feincms_render_region feincms_page "main" request %}
-            </div>
-
-            <div id="newsfeed" class="grid_4">
-              <h2>News Feed</h2> 
-              <div id="activityFeed">
-                <img id="loading" src="{{STATIC_URL}}img/ajax-loading.gif" />
-              </div>
-              {% feincms_render_region feincms_page "sidebar" request %}
-            </div>
-          </div>
-
-          {% endblock %}
+          {% block content %}{% endblock %}
 
           <div id="footer" class="container_16 clearfix">
             <div id="footer-content" class="grid_16">

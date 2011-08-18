@@ -52,10 +52,13 @@ def register(cls, admin_cls):
     cls.add_to_class('_header_image', MediaFileForeignKey(MediaFile, blank=True, null=True,
         help_text=_('Link to an image to use for the page header. We recommend resizing it to 960x210 so there are no surprises.')))
     cls.add_to_class('_accent_color', ColorField(_('accent color'), blank=True,
-        default="#ffffff",
+        default="#A2E663",
         help_text=_('Accent color (in hex): used for navigation tabs and links')))
 
+    # Ask matthias about this
     feincms_item_editor_inline = ImageContentInline
+
+    cls.add_to_class('feincms_item_editor_inline', feincms_item_editor_inline)
 
     @monkeypatch_property(cls)
     def content_title(self):
