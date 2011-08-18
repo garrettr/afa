@@ -8,6 +8,9 @@ body {
 
 img { height:auto; max-width: 100%; }
 
+a { color: #499DF2; text-decoration:none; }
+a:hover { text-decoration: underline; }
+
 #stripe {  
   border-top:5px solid #a2e663;
   width:100%;
@@ -46,11 +49,13 @@ img { height:auto; max-width: 100%; }
 #top li {
 }
 #top a {
-  padding:15px 20px 5px 5px;
+  padding:15px 22px 5px 7px;
+  border-radius: 0px 0px 8px 8px;
 }
 #top a:hover {
   background: #a2e663;
   color:white;
+  text-decoration:none;
 }
 #top .active {
   background: #a2e663;
@@ -67,7 +72,7 @@ img { height:auto; max-width: 100%; }
   padding:5px 10px 5px 10px;
 }
 #sub a:hover {
-  color: #555;
+  text-decoration:none;
   color: #a23663;
 }
 #sub .active {
@@ -79,7 +84,7 @@ img { height:auto; max-width: 100%; }
 #header {
   background:url('../img/head-creek.jpg');
   position:relative;
-  margin-top:10px;
+  margin-top:12px;
   border-bottom:5px #ccc solid;
   height:210px;
 }

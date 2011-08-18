@@ -4,11 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from feincms._internal import monkeypatch_property
 
 from feincms.content.medialibrary.v2 import MediaFileContent
+from feincms.module.medialibrary.models import MediaFile
+from feincms.module.medialibrary.fields import MediaFileForeignKey
+from feincms.admin.item_editor import FeinCMSInline
+from afa.models import ImageContentInline
 
 from django import forms
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+
 
 class ColorWidget(forms.TextInput):
     
@@ -44,11 +49,16 @@ class ColorField(models.CharField):
 def register(cls, admin_cls):
     cls.add_to_class('_content_title', models.TextField(_('content title'), blank=True,
         help_text=_('The first line is the main title, the following lines are subtitles.')))
-    cls.add_to_class('_header_image', models.ForeignKey('MediaFileContent', blank=True, null=True,
-        help_text=_('Link to an image to use for the page header')))
+    cls.add_to_class('_header_image', MediaFileForeignKey(MediaFile, blank=True, null=True,
+        help_text=_('Link to an image to use for the page header. We recommend resizing it to 960x210 so there are no surprises.')))
     cls.add_to_class('_accent_color', ColorField(_('accent color'), blank=True,
-        default="#ffffff",
+        default="#A2E663",
         help_text=_('Accent color (in hex): used for navigation tabs and links')))
+
+    # Ask matthias about this
+    feincms_item_editor_inline = ImageContentInline
+
+    cls.add_to_class('feincms_item_editor_inline', feincms_item_editor_inline)
 
     @monkeypatch_property(cls)
     def content_title(self):
@@ -67,7 +77,7 @@ def register(cls, admin_cls):
 
     @monkeypatch_property(cls)
     def header_image(self):
-        return self._header_image.photo
+        return self._header_image.file
 
     @monkeypatch_property(cls)
     def accent_color(self):
