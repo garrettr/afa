@@ -9,15 +9,7 @@ from feincms.content.section.models import SectionContent
 from feincms.content.table.models import TableContent
 from feincms.content.application.models import ApplicationContent
 
-Page.register_templates({
-    'key': 'base',
-    'title': 'Base Template',
-    'path': 'base.html',
-    'regions': (
-        ('main', 'Main region'),
-        ('sidebar', 'Sidebar', 'inherited'),
-        ),
-    },
+Page.register_templates(
     {
     'key': 'main-sidebar',
     'title': 'Main -> Sidebar',
@@ -37,6 +29,14 @@ Page.register_templates({
         ),
     },
     {
+    'key': 'fullpage',
+    'title': 'Full Page',
+    'path': 'fullpage.html',
+    'regions': (
+        ('main', 'Main region'),
+    )
+    },
+    {
     'key': 'three-col',
     'title': 'Three Column',
     'path': '3col.html',
@@ -45,6 +45,15 @@ Page.register_templates({
         ('centercol', 'Center Column'),
         ('rightcol', 'Right Column'),
         )
+    },
+    {
+    'key': 'Home',
+    'title': 'Home (with newsfeed)',
+    'path': 'home.html',
+    'regions': (
+        ('main', 'Main region'),
+        ('sidebar', 'Sidebar', 'inherited'),
+        ),
     },
 )
 
