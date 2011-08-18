@@ -8,6 +8,9 @@ body {
 
 img { height:auto; max-width: 100%; }
 
+a { color: #499DF2; text-decoration:none; }
+a:hover { text-decoration: underline; }
+
 #stripe {  
   border-top:5px solid #a2e663;
   width:100%;

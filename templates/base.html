@@ -16,8 +16,6 @@
       #header { background:url({{feincms_page.header_image|cropscale:"960x210"}}) }
       {% endif %}
       {% if feincms_page.accent_color %}
-      a { color: {{ feincms_page.accent_color }}; text-decoration:none;}
-      a:hover { text-decoration:underline; }
       #stripe { border-top: 5px solid {{ feincms_page.accent_color }}; }
       #top a:hover { background: {{ feincms_page.accent_color }}; }
       #top .active { background: {{ feincms_page.accent_color }}; }
