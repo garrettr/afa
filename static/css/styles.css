@@ -90,7 +90,7 @@ a:hover { text-decoration: underline; }
 }
 
 #header-text {
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.75);
   padding: 8px 16px;
   position:absolute;
   top: 28px;
