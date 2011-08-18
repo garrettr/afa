@@ -113,9 +113,6 @@ class ImageContent(models.Model):
 
 Page.create_content_type(ImageContent)
 
-from sortedm2m.fields import SortedManyToManyField
-from django.contrib import admin
-
 class GalleryContent(models.Model):
 
     title = models.CharField(max_length=200)
