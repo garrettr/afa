@@ -90,7 +90,7 @@ a:hover { text-decoration: underline; }
 }
 
 #header-text {
-  background:rgba(0,0,0,0.75);
+  background:rgba(0,0,0,0.5);
   padding: 8px 16px;
   position:absolute;
   top: 28px;
@@ -164,7 +164,7 @@ h3 {
 
 #content { margin-top: 21px; min-height:100%; }
 
-p { margin-bottom:21px; }
+p { margin-bottom: 21px; }
 
 /*
 ---- FOOTER ----

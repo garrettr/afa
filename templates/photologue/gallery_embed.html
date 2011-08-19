@@ -1,6 +1,7 @@
-
+<p>
 <div id="{{ gallery.title }}">
 </div>
+</p>
 
 <script>
 var {{ gallery.title }}_data = [
@@ -8,7 +9,7 @@ var {{ gallery.title }}_data = [
     {
         image: '{{ photo.get_display_url }}',
         thumb: '{{ photo.get_thumbnail_url }}',
-        big: '',
+        big: '{{ photo.get_absolute_url }}',
         title: '{{ photo.title }}',
         description: '{{ photo.caption }}'
     },
