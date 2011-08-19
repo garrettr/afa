@@ -7,13 +7,11 @@ from feincms.content.medialibrary.v2 import MediaFileContent
 from feincms.module.medialibrary.models import MediaFile
 from feincms.module.medialibrary.fields import MediaFileForeignKey
 from feincms.admin.item_editor import FeinCMSInline
-from afa.models import ImageContentInline
 
 from django import forms
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-
 
 class ColorWidget(forms.TextInput):
     
@@ -46,7 +44,12 @@ class ColorField(models.CharField):
         kwargs['widget'] = ColorWidget
         return super(ColorField, self).formfield(**kwargs)
 
+class HeaderImageContentInline(FeinCMSInline):
+    raw_id_fields = ('_header_image',)
+
 def register(cls, admin_cls):
+    feincms_item_editor_inline = HeaderImageContentInline
+
     cls.add_to_class('_content_title', models.TextField(_('content title'), blank=True,
         help_text=_('The first line is the main title, the following lines are subtitles.')))
     cls.add_to_class('_header_image', MediaFileForeignKey(MediaFile, blank=True, null=True,
@@ -55,10 +58,9 @@ def register(cls, admin_cls):
         default="#A2E663",
         help_text=_('Accent color (in hex): used for navigation tabs and links')))
 
-    # Ask matthias about this
-    feincms_item_editor_inline = ImageContentInline
 
-    cls.add_to_class('feincms_item_editor_inline', feincms_item_editor_inline)
+    # Ask matthias about this
+    cls.add_to_class('feincms_item_editor_inline', HeaderImageContentInline)
 
     @monkeypatch_property(cls)
     def content_title(self):
