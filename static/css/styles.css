@@ -73,7 +73,6 @@ a:hover { text-decoration: underline; }
 }
 #sub a:hover {
   text-decoration:none;
-  color: #a23663;
 }
 #sub .active {
   margin-top:0px;
