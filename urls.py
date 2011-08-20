@@ -17,7 +17,17 @@ urlpatterns = patterns('',
 
     url(r'^news/', include('news.urls')),
 
+)
+
+# development media-serving URLs
+from django.conf import settings
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': os.path.join(os.path.dirname(__file__), 'media/')}),
+    )
+
+urlpatterns += patterns('',
     # feincms
     url(r'', include('feincms.urls')),
-
 )
