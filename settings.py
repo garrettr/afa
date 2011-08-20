@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'mptt',
     'afa',
     'feedit',
+    'news',
 )
 
 # A sample logging configuration. The only tangible logging
