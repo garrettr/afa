@@ -9,7 +9,15 @@ post_info_dict = {
     }
 
 urlpatterns = patterns('django.views.generic.date_based',
-    (r'^$', 'archive_index', post_info_dict, 'news_post_archive_index'),
+    (r'^$', 'archive_index', post_info_dict,
+        'news_post_archive_index'),
+    (r'^(?P<year>\d{4})/$', 'archive_year', post_info_dict,
+        'news_post_archive_year'),
+    (r'^(?P<year>\d{4})/(?P<month>\w{3})/$', 'archive_month', post_info_dict,
+        'news_post_archive_month'),
+    (r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/$', 'archive_day', post_info_dict,
+        'news_post_archive_day'),
     (r'^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
-        'object_detail', post_info_dict, 'news_post_detail'),
+        'object_detail', post_info_dict,
+        'news_post_detail'),
 )
