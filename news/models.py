@@ -7,12 +7,7 @@ from feincms.module.medialibrary.models import MediaFile
 from feincms.module.medialibrary.fields import MediaFileForeignKey
 from feincms.admin.item_editor import FeinCMSInline
 
-class PhotoContentInline(FeinCMSInline):
-    raw_id_fields = ('photo',)
-
 class Post(models.Model):
-    feincms_item_editor_inline = PhotoContentInline # thumbnail for photo
-
     headline = models.CharField(_(u'headline'), max_length=100)
     slug = models.SlugField(_(u'slug'), max_length=100)
     body = models.TextField(_(u'body'), blank=True) # feincms/tinymce richtext widget

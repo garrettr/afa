@@ -2,6 +2,7 @@ from django.contrib import admin
 from news.models import Post
 
 class PostAdmin(admin.ModelAdmin):
+    raw_id_fields = ('photo',)
     list_display = ('pub_date', 'headline', 'photo', )
     list_display_links = ('headline', )
     list_filter = ('pub_date',)
