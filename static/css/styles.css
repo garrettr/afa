@@ -6,8 +6,6 @@ html {
 body {
 }
 
-img { height:auto; max-width: 100%; }
-
 a { color: #499DF2; text-decoration:none; }
 a:hover { text-decoration: underline; }
 
@@ -183,9 +181,10 @@ p { margin-bottom: 21px; }
  * Images
  */
 
-.image { position:relative; display:inline-block; }
+.image { position:relative; display:inline-block; 
+         height: auto; max-width: 100%; }
 .image p { margin-bottom:0; }
-.image img { margin-bottom:5px; }
+.image img { margin-bottom:5px; height: auto; max-width: 100%; }
 #center-block { margin: 0 auto; margin-bottom:21px; }
 #left { float: left; margin: 5px 15px 5px 0px; clear:both; }
 #right { float: right; margin: 5px 0px 5px 15px; clear:both; }
