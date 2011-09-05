@@ -14,6 +14,9 @@ class Post(models.Model):
     photo = MediaFileForeignKey(MediaFile, blank=True, null=True, 
             help_text=_('Optional: Pick a snapshot to go along with this post. Will be resized to fit'))
     pub_date = models.DateTimeField(_(u'published on'), default=datetime.now())
+    media_files = models.ManyToManyField(MediaFile, related_name='post_mediafiles',
+            blank=True, null=True
+        )
 
     def __unicode__(self):
         return u'%s' % self.headline
@@ -26,5 +29,3 @@ class Post(models.Model):
             'day': self.pub_date.strftime("%d"),
             'slug': self.slug
         })
-
-
