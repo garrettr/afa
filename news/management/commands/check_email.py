@@ -5,10 +5,12 @@ import imaplib
 import email
 from django.contrib.auth import User
 
-EMAIL_HOSTNAME = ''
-ACCOUNT_NAME = ''
-ACCOUNT_PASSWORD = ''
-MAILBOX_NAME = ''
+NEWS_HOSTNAME = ''
+NEWS_ACCOUNT = ''
+NEWS_PASSWORD = ''
+NEWS_MAILBOX = ''
+
+from django.conf import settings
 
 def open_connection(hostname, account, password, verbose=False):
     # Connect to the server
