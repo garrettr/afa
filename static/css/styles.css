@@ -146,14 +146,18 @@ h3 {
 #newsfeed ol li {
   display:block;
   background:#ddd;
-  border-radius:8px;
+  border-radius:0px 10px 10px 0px;
   padding:10px;
-  margin-bottom:6px;
+  margin-bottom:5px;
   font-size:12px;
-  background:
-  -moz-box-shadow: 0 0 3px #888;
-  -webkit-box-shadow: 0 0 3px #888;
-  box-shadow: 0 0 3px #888;
+  background:#eeefff;
+  -moz-box-shadow: 0 0 1px #888;
+  -webkit-box-shadow: 0 0 1px #888;
+  box-shadow: 0 0 1px #888;
+}
+
+#newsfeed ol li:hover {
+    background:#F5F7FF;
 }
 
 #newsfeed ol li p img { float: right; }
