@@ -1,8 +1,14 @@
 from django.core.management.base import BaseCommand, CommandError
 from news.models import Post
 
+from django.core.files import File
+from django.conf import settings
+from feincms.module.medialibrary.models import MediaFile
+
+import sys, os
 import imaplib
 import email
+import mimetypes
 
 NEWS_HOSTNAME = ''
 NEWS_ACCOUNT = ''
@@ -67,20 +73,46 @@ def process_email(msg):
             # consider security risks
             attachments.append(part)
 
+    # debugging
+    print 'body[]: ', body
+    print 'attachments[]: ', attachments
+
     # if text/html exists, use it
     body_text = [p.get_payload() for p in body if p.get_content_type() == 'text/html']
     if not body_text:
+        # default to 'text/plain'
         body_text = [p.get_payload() for p in body if p.get_content_type() == 'text/plain']
-    # strip headers (first 3 lines)
-    body_text = '\n'.join(body_text[0].split('\n')[2:])
-    print body_text
+    body_text = body_text[0]
 
     # process attachments
-    if attachments:
-        pass
+    counter = 1
+    media_files = []
+    for attachment in attachments:
+        # create a mediafile, save it
+        filename = attachment.get_filename()
+        if not filename:
+            ext = mimetypes.guess_extension(attachment.get_content_type())
+            if not ext:
+                # Use generic extension
+                ext = '.bin'
+            filename = 'part-%03d%s' % (counter, ext)
+        counter += 1
+        # save intermediate file to tmp
+        fpath = os.path.join(os.path.join
+                (settings.MEDIA_ROOT, 'news_uploads'),
+                filename)
+        with open(fpath, 'wb') as fp:
+            fp.write(attachment.get_payload(decode=True))
+        with open(fpath, 'rb') as fp:
+            m = MediaFile(file = File(fp))
+            m.save()
+            media_files.append(m)
 
     post_photo = None
-    # media_files?
+    for mf in media_files:
+        if mf.type == 'image':  # grab the first attached image
+            post_photo = mf
+            break
 
     p = Post(
             headline=msg['subject'],
@@ -89,6 +121,8 @@ def process_email(msg):
             photo = post_photo,
             pub_date = datetime.now(),
         )
+    p.save()
+    p.media_files.add(*media_files)
     p.save()
 
 class Command(BaseCommand):
@@ -119,8 +153,8 @@ class Command(BaseCommand):
             if msg_ids != ['']: # if there are unseen msgs
                 # fetch wants ids with commas, like 1,2,3
                 mids = ','.join(msg_ids[0].split(' '))
-                typ, msg_data = c.fetch(mids, '(RFC822)')
                 # note - this fetch applies makes all msgs SEEN
+                typ, msg_data = c.fetch(mids, '(RFC822)')
                 for response_part in msg_data:
                     if isinstance(response_part, tuple):
                         msg = email.message_from_string(response_part[1])
