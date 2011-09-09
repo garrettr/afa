@@ -15,4 +15,10 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'body', )
     list_per_page = 10
 
+    class Media:
+        js = (
+            "/static/js/tiny_mce/tiny_mce.js",
+            "/static/js/admin_tinymce.js",
+        )
+
 admin.site.register(Post, PostAdmin)
