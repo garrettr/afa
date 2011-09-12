@@ -13,7 +13,7 @@
     {% if media_file.type == "image" %}
     {# add a small thumbnail #}
     <a href="{{ media_file.file.url }}">
-        <img style="float:left; margin-right:12px;" src='{{ media_file.file|cropscale:"80x80" }}' />
+        <img style="float:left; margin-right:12px;" src='{{ media_file.file|thumbnail:"80x80" }}' />
     </a>
     {% else %}
     {% if media_file.type == "pdf" %}

@@ -168,7 +168,8 @@ h3 {
 p { margin-bottom: 21px; }
 
 ol, ul { margin-bottom: 21px; }
-li { margin-left: 2.5em; }
+#content #main li { margin-left: 2.5em; }
+.post { margin-bottom: 21px; }
 
 /*
 ---- FOOTER ----
