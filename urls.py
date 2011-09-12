@@ -27,6 +27,14 @@ if settings.DEBUG:
             {'document_root': os.path.join(os.path.dirname(__file__), 'media/')}),
     )
 
+# Sitemap
+from feincms.module.page.sitemap import PageSitemap
+sitemaps = { 'pages': PageSitemap }
+urlpatterns += patterns('',
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps}),
+    )
+
 urlpatterns += patterns('',
     # feincms
     url(r'', include('feincms.urls')),
