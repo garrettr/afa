@@ -6,7 +6,7 @@ from news.models import Post
 post_info_dict = {
     'queryset': Post.objects.all(),
     'date_field': 'pub_date',
-    }
+}
 
 urlpatterns = patterns('django.views.generic.date_based',
     (r'^$', 'archive_index', post_info_dict,

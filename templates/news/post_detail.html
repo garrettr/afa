@@ -1,0 +1,72 @@
+{% load feincms_thumbnail %}
+<div class="post">
+    <a href="{{ object.photo.file.url }}">
+        <img style="float:right; margin-right:12px;" src='{{ object.photo.file|thumbnail:"200x200" }}' />
+    </a>
+    <h2>{{ object.headline }}</h2>
+    <span class="date">{{ object.pub_date|date:"d.m.Y" }}</span>
+    {{ object.body|safe }}
+    {% if object.media_files %}
+    <h2>Downloads</h2>
+    {% for media_file in object.media_files.all %}
+    <div class="downloads">
+    {% if media_file.type == "image" %}
+    {# add a small thumbnail #}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{ media_file.file|cropscale:"80x80" }}' />
+    </a>
+    {% else %}
+    {% if media_file.type == "pdf" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/pdf-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "doc" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/doc-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "ppt" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/ppt-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "xls" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/xls-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "zip" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/zip-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "audio" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/mp3-icon.png' />
+    </a>
+    {% else %}
+    {% if media_file.type == "video" %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/mov-icon.png' />
+    </a>
+    {% else %}
+    <a href="{{ media_file.file.url }}">
+        <img style="float:left; margin-right:12px;" src='{{STATIC_URL}}img/generic-icon.png' />
+    </a>
+    {% endif %}{% endif %}{% endif %}{% endif %}{% endif %}{% endif %}{% endif %}{% endif %}
+    <p>
+    <a href="{{media_file.file.url}}">{{ media_file.file.name }}</a>
+    <br />
+    <span class="size">Size: {{ media_file.file.size|filesizeformat }}</span>
+    <br />
+    {% if media_file.type == "image" %}
+    <span class="type">Type: {{ media_file.type|capfirst }}</span>
+    {% else %}
+    <span class="type">Type: {{ media_file.type }}</span>
+    {% endif %}
+    </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>

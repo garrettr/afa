@@ -1,0 +1,12 @@
+{% load feincms_thumbnail %}
+<div id="year_archive">
+<h2>News Archive: {{ year }}</h2>
+<ul>
+    {% for month in date_list %}
+    <li>
+    <a href="{% url news_post_archive_month year,month|date:"b" %}">
+        {{ month|date:"F" }}
+    </a>
+    {% endfor %}
+</ul>
+</div>

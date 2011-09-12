@@ -140,8 +140,8 @@ h3 {
 /*
 ---- NEWSFEED ----
  */
-  #newsfeed ol {
-    list-style-type:none; 
+#newsfeed ol {
+  list-style-type:none; 
 }
 #newsfeed ol li {
   display:block;
@@ -167,12 +167,14 @@ h3 {
 
 p { margin-bottom: 21px; }
 
+ol, ul { margin-bottom: 21px; }
+li { margin-left: 2.5em; }
+
 /*
 ---- FOOTER ----
  */
   div#footer {
     margin-top:42px;
-    /* serif for the headers - nice contrast */
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     background-color:#333;
     color:white;
@@ -201,3 +203,5 @@ p { margin-bottom: 21px; }
     font-size:12px;
     background:rgba(0,0,0,0.5);
 }
+
+.downloads { height:90px; border-top: 1px solid gray; padding-top:4px;}
