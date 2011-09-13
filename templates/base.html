@@ -29,85 +29,67 @@
     <!-- jquery -->
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script> -->
     <script src="{{STATIC_URL}}js/jquery-1.6.2.min.js" type="text/javascript"></script>
-    <!-- so.what.social -->
-    <script src="{{STATIC_URL}}js/jquery.jsonp-2.1.4.js" type="text/javascript"></script>
-    <script src="{{STATIC_URL}}js/so.what.social.js" type="text/javascript"></script>
-    {% load feedit_tags %}
-    <script type="text/javascript">
-      $(document).ready(function() {
-          $("#activityFeed").soWhatSocial({
-            "feeds": {% get_feed_list %},
-            "icons": {
-            "rss": "{{STATIC_URL}}img/rss_21.png",
-            "facebook": "{{STATIC_URL}}img/facebook_21.png",
-            "twitter": "{{STATIC_URL}}img/twitter_21.png"
-            }
-            // custom settings...
-            });
-          });
-        </script>
+    <!-- galleria -->
+    <script src="{{STATIC_URL}}galleria/galleria-1.2.5.min.js"></script>
+    <script src="{{STATIC_URL}}galleria/galleria.classic.min.js"></script>
 
-        <!-- galleria -->
-        <script src="{{STATIC_URL}}galleria/galleria-1.2.5.min.js"></script>
-        <script src="{{STATIC_URL}}galleria/galleria.classic.min.js"></script>
+  </head>
 
-      </head>
+  <body>
 
-      <body>
+    <!-- colored stripe up top -->
+    <div id="stripe">
+    </div>
 
-        <!-- colored stripe up top -->
-        <div id="stripe">
+    <div class="container">
+      <div class="container_12">
+        <div class="grid_12" id="top-nav">
+          <ul class="nav" id="top">
+            {% feincms_navigation of feincms_page as toplevel level=1 %}
+            {% for p in toplevel %}
+            <li>
+            <a style="background: {{ p.accent_color }}" {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
+      </div>
 
-        <div class="container">
-          <div class="container_12">
-            <div class="grid_12" id="top-nav">
-              <ul class="nav" id="top">
-                {% feincms_navigation of feincms_page as toplevel level=1 %}
-                {% for p in toplevel %}
-                <li>
-                <a style="background: {{ p.accent_color }}" {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
+      <div class="container_12">
+        <div class="grid_12" id="header">
+          <div id="header-text" class="sevencol">
+            <h1>{{ feincms_page.content_title }}</h1>
+            <h2>{{ feincms_page.content_subtitle }}</h2>
           </div>
-
-          <div class="container_12">
-            <div class="grid_12" id="header">
-              <div id="header-text" class="sevencol">
-                <h1>{{ feincms_page.content_title }}</h1>
-                <h2>{{ feincms_page.content_subtitle }}</h2>
-              </div>
-            </div>
-          </div>
-
-          <div class="container_12">
-            <div class="grid_12">
-              <ul class="nav" id="sub">
-                {% feincms_navigation of feincms_page as sublevel level=2 %}
-                {% for p in sublevel %}
-                <li {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} >
-                <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-
-          {% block content %}{% endblock %}
-
-          <div id="footer" class="container_16 clearfix">
-            <div id="footer-content" class="grid_16">
-              <p>This site &copy; The Alliance for Appalachia, 2011<br />
-              Web design by <a href="http://garrett.im">Garrett Robinson</a></p>
-            </div>
-          </div>
-
         </div>
+      </div>
 
-        {% feincms_frontend_editing feincms_page request %}
+      <div class="container_12">
+        <div class="grid_12">
+          <ul class="nav" id="sub">
+            {% feincms_navigation of feincms_page as sublevel level=2 %}
+            {% for p in sublevel %}
+            <li {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} >
+            <a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
 
-        <span id="something">{% get_fragment request "something" %}</span>
-      </body>
-    </html>
+      {% block content %}{% endblock %}
+
+      <div id="footer" class="container_16 clearfix">
+        <div id="footer-content" class="grid_16">
+          <p>This site &copy; The Alliance for Appalachia, 2011<br />
+          Web design by <a href="http://garrett.im">Garrett Robinson</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    {% feincms_frontend_editing feincms_page request %}
+
+    <span id="something">{% get_fragment request "something" %}</span>
+  </body>
+</html>
