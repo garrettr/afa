@@ -147,7 +147,8 @@ INSTALLED_APPS = (
     'feincms.module.medialibrary',
     'mptt',
     'afa',
-    'feedit',
+    #'feedit',
+    'feedeater',
     'news',
 )
 
