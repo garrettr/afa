@@ -82,7 +82,7 @@ class Feed(models.Model):
                 # get most recent saved post
                 mr_saved = sorted_entries[0]
                 for post in feed['data']:
-                    post_time = datetime.striptime(
+                    post_time = datetime.strptime(
                         post['created_time'],
                         "%Y-%m-%dT%H:%M:%S+0000"
                     )
