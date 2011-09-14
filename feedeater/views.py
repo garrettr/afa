@@ -5,7 +5,7 @@ from django.http import Http404
 
 from feedeater.models import Feed, Entry
 
-def feedeater_interactive(request):
+def search(request):
     ''' Allows one to search and sort the results from Feedeater '''
     pass
 
