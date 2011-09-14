@@ -36,7 +36,8 @@ class Feed(models.Model):
     """
     title = models.CharField(max_length=140,
         help_text="A descriptive name for this feed")
-    url = models.URLField(help_text="Enter a specific URL")
+    url = models.CharField(max_length=200,
+            help_text="Enter a specific URL, Facebook ID, or Twitter screen name")
 
     SOURCE_CHOICES = (
         (u'FB', u'Facebook'),
