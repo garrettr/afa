@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Recent entries</title>
+  </head>
+
+  <body>
+    <ol>
+      {% for entry in recent_entries %}
+      <li>
+      <p>{{ entry.feed.title }}</p>
+      <p><em>Posted on: {{ entry.posted_on|date:"D M d Y" }}</em></p>
+      <p>{{ entry.content|safe|urlize }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </body>
+</html>

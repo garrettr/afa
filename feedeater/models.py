@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import strip_tags
 
 from datetime import datetime
 import re
@@ -36,7 +37,7 @@ class Feed(models.Model):
     """
     title = models.CharField(max_length=140,
         help_text="A descriptive name for this feed")
-    url = models.CharField(max_length=200,
+    url = models.CharField(max_length=200, unique=True,
             help_text="Enter a specific URL, Facebook ID, or Twitter screen name")
 
     SOURCE_CHOICES = (
@@ -51,7 +52,12 @@ class Feed(models.Model):
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
 
     def __unicode__(self):
-        return u'%s : %s' % (self.title, self.get_source_display())
+        return u'%s' % (self.title)
+
+    # Do this for now: it works, but a full serialization solution would be
+    # nicer. Here's an option: http://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
+    def natural_key(self):
+        return (self.title, self.url)
 
     def update_entries(self):
         '''
@@ -99,7 +105,7 @@ class Feed(models.Model):
                                     feed=self,
                                     title=post['name'],
                                     url=purl,
-                                    content=post['message'],
+                                    content=strip_tags(post['message']),
                                     # example:
                                     # "created_time": "2011-07-20T19:49:17+0000"
                                     posted_on=datetime.strptime(
@@ -124,7 +130,7 @@ class Feed(models.Model):
                                 feed=self,
                                 title=post['name'],
                                 url=purl,
-                                content=post['message'],
+                                content=strip_tags(post['message']),
                                 # example:
                                 # "created_time": "2011-07-20T19:49:17+0000"
                                 posted_on=datetime.strptime(
@@ -166,7 +172,7 @@ class Feed(models.Model):
                                 feed=self,
                                 title=status.text,
                                 url=status_url,
-                                content=status.text,
+                                content=strip_tags(status.text),
                                 posted_on=datetime(*rfc822.parsedate(status.created_at)[:6])
                             )
                         e.save()
@@ -182,7 +188,7 @@ class Feed(models.Model):
                             feed=self,
                             title=status.text,
                             url=status_url,
-                            content=status.text,
+                            content=strip_tags(status.text),
                             posted_on=datetime(*rfc822.parsedate(status.created_at)[:6])
                         )
                     e.save()
@@ -203,7 +209,7 @@ class Feed(models.Model):
                                 feed=self,
                                 title=post.title,
                                 url=post.link,
-                                content=post.summary,
+                                content=strip_tags(post.summary),
                                 posted_on=datetime(*post.updated_parsed[:6])
                             )
                         e.save()
@@ -214,7 +220,7 @@ class Feed(models.Model):
                             feed=self,
                             title=post.title,
                             url=post.link,
-                            content=post.summary,
+                            content=strip_tags(post.summary),
                             posted_on=datetime(*post.updated_parsed[:6])
                         )
                     e.save()
