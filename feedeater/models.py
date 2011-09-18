@@ -58,7 +58,7 @@ class Feed(models.Model):
     # Do this for now: it works, but a full serialization solution would be
     # nicer. Here's an option: http://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
     def natural_key(self):
-        return (self.title, self.url)
+        return (self.title, self.url, self.source)
 
     def update_entries(self):
         '''
