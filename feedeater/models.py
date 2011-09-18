@@ -38,14 +38,15 @@ class Feed(models.Model):
     title = models.CharField(max_length=140,
         help_text="A descriptive name for this feed")
     url = models.CharField(max_length=200, unique=True,
-            help_text="Enter a specific URL, Facebook ID, or Twitter screen name")
+            help_text="Enter the URL of a Facebook Page, Twitter Page, or RSS/Atom Feed")
 
     SOURCE_CHOICES = (
         (u'FB', u'Facebook'),
         (u'TW', u'Twitter'),
         (u'RA', u'RSS/Atom'),
     )
-    source = models.CharField(max_length=2, choices=SOURCE_CHOICES)
+    source = models.CharField(max_length=2, choices=SOURCE_CHOICES,
+            editable=False)
     
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     # should reflect last time we pulled something new?
@@ -229,6 +230,19 @@ class Feed(models.Model):
             print "I don't recognize that source type."
             # This should never happen - handle properly later
 
+    def _get_source(self):
+        '''
+        Given a URL, attempt to return the source
+        '''
+        if "twitter.com/" in self.url:
+            return 'TW'
+        elif "facebook.com/" in self.url:
+            return 'FB'
+        else: # default try to process as RSS/Atom
+            return 'RA'
+
     def save(self, *args, **kwargs):
+        # figure out the feed source
+        self.source = self._get_source()
         super(Feed, self).save(*args, **kwargs)
         self.update_entries()
