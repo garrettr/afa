@@ -7,10 +7,13 @@ import re
 import feedparser
 import twitter
 import rfc822   # for parsing Twitter's dates
-from settings import FACEBOOK_APP_ID, FACEBOOK_APP_TOKEN
+from django.conf import settings
 # using the idea from http://stackoverflow.com/questions/2690723/facebook-graph-api-and-django
 from urllib2 import urlopen
 from simplejson import loads
+
+FACEBOOK_APP_ID = settings.FACEBOOK_APP_ID
+FACEBOOK_APP_TOKEN = settings.FACEBOOK_APP_TOKEN
 
 class Entry(models.Model):
     """
