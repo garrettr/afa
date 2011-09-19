@@ -21,7 +21,7 @@ class Entry(models.Model):
     """
     feed = models.ForeignKey("Feed", related_name="entries")
     title = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
+    url = models.CharField(max_length=500)
     content = models.TextField()
 
     posted_on = models.DateTimeField(_('posted on'))
@@ -40,7 +40,7 @@ class Feed(models.Model):
     """
     title = models.CharField(max_length=140,
         help_text="A descriptive name for this feed")
-    url = models.CharField(max_length=200, unique=True,
+    url = models.CharField(max_length=500, unique=True,
             help_text="Enter the URL of a Facebook Page, Twitter Page, or RSS/Atom Feed")
 
     SOURCE_CHOICES = (
