@@ -12,12 +12,12 @@ var build_list = function(data) {
         html += "<li>";
         html += '<a href="' + data[i].fields.feed[1] + '">' + data[i].fields.feed[0] + '</a><br />';
         html += '<span class="date">Posted on: ' + get_date_string(data[i].fields.posted_on) + '</span><br />';
-        html += '<a href="' + data[i].fields.url + '">' + data[i].fields.title + '</a>';
+        html += '<a href="' + data[i].fields.url + '">' + data[i].fields.title;
         // print content if NOT a tweet - for tweets, title = content = tweet
         if( data[i].fields.feed[2] != "TW" ) {
             html += '<p>' + data[i].fields.content + '</p>';
         }
-        html += "</li>";
+        html += "</a></li>";
     }
     html += "</ol>";
     return html;
