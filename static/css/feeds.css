@@ -29,3 +29,5 @@ ol#results a:hover {
 }
 
 ol#results .feedpic { float:left; padding-right:16px; padding-top: 2px;}
+
+.highlight { background-color:yellow; }

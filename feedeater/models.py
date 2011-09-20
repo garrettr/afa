@@ -275,7 +275,6 @@ class Feed(models.Model):
         
         # do shit with image_url
         # supposed to use ContentFile?
-        print "Image URL: ", image_url
         image_data = urlopen(image_url)
         filename = urlparse(image_data.geturl()).path.split('/')[-1]
         self.image = filename

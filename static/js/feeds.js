@@ -47,7 +47,13 @@ var search_request = function(query, sort_order) {
     data = { q:query, so:sort_order };
     $.getJSON('ajax/', data,
     function(data) {
-        $("#results").hide().replaceWith(build_list(data)).show();
+        $("ol#results").hide().replaceWith(build_list(data)).show();
+        // remove old highlighting
+        $('li').removeHighlight();
+        words = query.toLowerCase().split(" ");
+        for( var i=0; i < words.length; i++ ) {
+            $('li').highlight(words[i]);
+        }
     });
   }
   return false;
