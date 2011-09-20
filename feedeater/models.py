@@ -1,15 +1,20 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
+from django.core.files import File
+from django.core.files.base import ContentFile
 
 from datetime import datetime
 import re
+import os
+import StringIO
 import feedparser
 import twitter
 import rfc822   # for parsing Twitter's dates
 from django.conf import settings
 # using the idea from http://stackoverflow.com/questions/2690723/facebook-graph-api-and-django
 from urllib2 import urlopen
+from urlparse import urlparse
 from simplejson import loads
 
 FACEBOOK_APP_ID = settings.FACEBOOK_APP_ID
@@ -42,6 +47,8 @@ class Feed(models.Model):
         help_text="A descriptive name for this feed")
     url = models.CharField(max_length=500, unique=True,
             help_text="Enter the URL of a Facebook Page, Twitter Page, or RSS/Atom Feed")
+    image = models.ImageField(upload_to="feedeater/", blank=True,
+            editable=True, default=None)
 
     SOURCE_CHOICES = (
         (u'FB', u'Facebook'),
@@ -61,7 +68,7 @@ class Feed(models.Model):
     # Do this for now: it works, but a full serialization solution would be
     # nicer. Here's an option: http://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
     def natural_key(self):
-        return (self.title, self.url, self.source)
+        return (self.title, self.url, self.source, self.image.name)
 
     def update_entries(self):
         '''
@@ -154,8 +161,6 @@ class Feed(models.Model):
             api = twitter.Api()
             # match against this regex
             # accepts http(s) full twitter url or just username
-            # seems like we should probably only allow full url - we use it for
-            # it's urlness later on
             tregx = re.match(
                     r'(https?://twitter.com/#!/){0,1}(?P<tid>[a-zA-Z0-9_]{1,15})',
                     self.url)
@@ -244,8 +249,47 @@ class Feed(models.Model):
         else: # default try to process as RSS/Atom
             return 'RA'
 
+    def _get_image(self):
+        '''
+        Given a URL and source type, try to get an image to associate, save it,
+        and set the image field
+        '''
+        image_url = None
+        if self.source == 'FB':
+            fbregx = re.match(
+                    r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
+                    self.url)
+            fbid = fbregx.group('fbid')
+            image_url = "https://graph.facebook.com/%s/picture" % (fbid)
+        elif self.source == 'TW':
+            api = twitter.Api()
+            tregx = re.match(
+                    r'(https?://twitter.com/#!/){0,1}(?P<tid>[a-zA-Z0-9_]{1,15})',
+                    self.url)
+            tid = tregx.group('tid')
+            user = api.GetUser(tid)
+            image_url = user.profile_image_url
+        elif self.source == 'RA':
+            self.image = None # or set to a default?
+            return
+        
+        # do shit with image_url
+        # supposed to use ContentFile?
+        print "Image URL: ", image_url
+        image_data = urlopen(image_url)
+        filename = urlparse(image_data.geturl()).path.split('/')[-1]
+        self.image = filename
+        self.image.save(
+            filename,
+            ContentFile(image_data.read()),
+            save=False
+            )
+
     def save(self, *args, **kwargs):
         # figure out the feed source
         self.source = self._get_source()
+        # try to get an image to associate with the feed
+        self._get_image()
         super(Feed, self).save(*args, **kwargs)
+        print "self.image.name: ", self.image.name
         self.update_entries()

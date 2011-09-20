@@ -13,6 +13,11 @@ body { width:600px; margin:0 auto; color: #333; }
   border:solid 1px #555;
 }
 
+ol#results {
+    list-style-type: none;
+    padding-left:0;
+}
+
 ol#results a {
   color: #333;
   text-decoration: none;
@@ -22,3 +27,5 @@ ol#results a:hover {
   color: #555;
   text-decoration: underline;
 }
+
+ol#results .feedpic { float:left; padding-right:16px; padding-top: 2px;}
