@@ -52,7 +52,9 @@ var search_request = function(query, sort_order) {
         $('li').removeHighlight();
         words = query.toLowerCase().split(" ");
         for( var i=0; i < words.length; i++ ) {
-            $('li').highlight(words[i]);
+            if( words[i] != '' ) {
+                $('li').highlight(words[i]);
+            }
         }
     });
   }
