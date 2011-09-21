@@ -9,19 +9,20 @@
   </head>
 
   <body>
-    <h2 style="text-align:center">Search Social Media Feeds</h2>
-    <div id="f">
-      <form>
-        <input type="text" name="search" id="search" /><br />
-        <label for="sort">Sort:</label>
-        <input type="radio" name="sort" id="sort" value="desc" checked />Descending<br />
-        <input type="radio" name="sort" id="sort" value="asc" />Ascending<br />
-      </form>
+    <div id="container">
+      <a href="/">« Home</a>
+      <div id="f">
+        <form>
+          <input type="text" name="search" id="search" value="Start typing to search..."/><br />
+          <label for="sort">Sort:</label>
+          <input type="radio" name="sort" id="sort" value="desc" checked />Descending<br />
+          <input type="radio" name="sort" id="sort" value="asc" />Ascending<br />
+        </form>
 
-      <div id="results">
-        <h3>Search results:</h3>
-        <ol id="results">
-        </ol>
+        <div id="results">
+          <ol id="results">
+          </ol>
+        </div>
       </div>
     </div>
   </body>

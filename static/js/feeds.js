@@ -7,7 +7,8 @@ var get_date_string = function(date) {
 }
 
 var build_list = function(data) {
-    var html = '<ol id="results">';
+    var html = '<ol id="results"><h2>Search results:</h2>';
+
     for(var i=0; i<data.length; i++) {
         html += "<li>";
         // start feed url
@@ -27,15 +28,19 @@ var build_list = function(data) {
         } else {
             html += '<img src="/media/' + data[i].fields.feed[3] + '" class="feedpic" />';
         }
-        html += data[i].fields.feed[0] + '</a><br />';
-        // end feed url - wraps around feed name
-        // title url - links to post
-        html += '<a href="' + data[i].fields.url + '">' + data[i].fields.title + '</a><br />';
+        // feed name
+        html += '<span class="feed">' + data[i].fields.feed[0] + '</span></a>';
         html += '<span class="date">Posted on: ' + get_date_string(data[i].fields.posted_on) + '</span><br />';
-        // print content if NOT a tweet - for tweets, title = content = tweet
+        // end feed url - wraps around feed name
+        
+        // print title if NOT a tweet - for tweets, title = content = tweet
         if( data[i].fields.feed[2] != "TW" ) {
-            html += '<p>' + data[i].fields.content + '</p>';
+          // title url - links to post
+          html += '<span class="title"><a href="' + data[i].fields.url + '">' + data[i].fields.title + '</a></span><br />';
         }
+
+
+        html += '<p>' + data[i].fields.content + '</p>';
         html += "</li>";
     }
     html += "</ol>";
@@ -57,11 +62,33 @@ var search_request = function(query, sort_order) {
             }
         }
     });
+  } else {
+    // print useful message, clear results
   }
   return false;
 };
 
 $(document).ready(function () {
+
+  $('input#search').addClass("blurField");
+
+  $('input#search').focus(function() {
+    $(this).removeClass("blurField").addClass("focusField");
+    if( this.value == this.defaultValue ) {
+      this.value = '';
+    }
+    if( this.value != this.defaultValue ) {
+      this.select();
+    }
+  });
+
+  $('input#search').blur(function() {
+    $(this).removeClass("focusField").addClass("blurField");
+    if( $.trim(this.value) == '' ) {
+      this.value = (this.defaultValue ? this.defaultValue : '');
+    }
+  });
+
   $("#search").keyup(function(e) {
     if( (e.keyCode >= 48 && e.keyCode <= 90) || e.keyCode == 8 ) {  // 0-9, a-z, 8=backspace
       search_request(this.value, $("input[@name='sort']:checked").val());
