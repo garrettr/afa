@@ -244,7 +244,9 @@ class Feed(models.Model):
         '''
         if "twitter.com/" in self.url:
             return 'TW'
-        elif "facebook.com/" in self.url:
+        elif "facebook.com/" in self.url and "/feed/" not in self.url:
+            # facebok rss feeds are at www.facebook.com/feed/...
+            # should be processed as RSS
             return 'FB'
         else: # default try to process as RSS/Atom
             return 'RA'
