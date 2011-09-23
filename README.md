@@ -1,37 +1,42 @@
 README
 ------
 
-## Why?
+## What?
 
-Trying a different CMS for the Alliance for Appalachia.
-I think they want more flexibility than Mezzanine seems able to provide.
-
-Don't spend too long on this - this is a complete rewrite, and should only be undertaken if you can
-get somewhere significant fast. 
+New website for the Alliance for Appalachia.
 
 ## Installation notes
 
 Using the feincms virtualenv for development.
 
-Dependencies:
+## Dependencies:
 
-1. feincms
-2. django-mptt
-3. PIL
-4. django-photologue-2.2
-
-## Todo
-Going to try incorporating django-photologue as the image
-manipulation/gallery solution.
-Configuring django-photologue:
-
-1.  Add 'photologue' to INSTALLED_APPS
-2.  syncdb, THEN `python manage.py plinit`
-3.  (OPTIONAL) Add photologue urls:
-    (r'^photologue/', include('photolgue.urls')), 
-4.  Copy templates to templates/photologue
+### Output of pip freeze (minus leftovers):
+Django==1.3
+FeinCMS==1.4.1
+PIL==1.1.7
+distribute==0.6.15
+django-mptt==0.5.pre
+feedparser==5.0.1
+httplib2==0.7.1
+oauth2==1.5.170
+python-twitter==0.8.2
+simplejson==2.1.6
+wsgiref==0.1.2
 
 Added accents.py:
 /Users/grobinso/Documents/code/virtualenv/python-envs/feincms/lib/python2.6/site-packages/feincms/module/page/extensions/accent.py
 
 This is a FeinCMS Page Extension. I'm keeping it in the repo - there's a symlink from the above path to the file in this git repo.
+
+The following three things are kept in the git repo but should be made accessible elsewhere. I use symlinks.
+
+1.  `news/`
+    Put this on your Python path.
+2.  `feedeater/`
+    likewise
+3.  `accent.py`
+    is a FeinCMS page extension. To install it, symlink it into `feincms/module/page/extensions/`.
+    `ln -s path/to/afa/accent.py path/to/feincms/module/page/extensions`
+
+For now and forever: to make symbolic links, the syntax is: `ln -s <target> <linkname>`
