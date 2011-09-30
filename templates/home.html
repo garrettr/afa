@@ -3,38 +3,38 @@
 {% load static %}
 
 {% block content %}
-<div id="content" class="container_12">
-    <div id="main" class="grid_8">
-        {% feincms_render_region feincms_page "main" request %}
-    </div>
+<div id="main" class="grid_8">
+  {% feincms_render_region feincms_page "main" request %}
+</div>
 
-    <div id="newsfeed" class="grid_4">
-        <h2>News Feed</h2> 
-        {% load feedeater_tags %}
-        {% get_latest_entries %}
-        {% if latest_entries %}
-        <ol>
-            {% for entry in latest_entries %}
-            <li>
-            <p>
-            {% if entry.feed.source == 'FB' %}<img src="{% get_static_prefix %}img/facebook_21.png" />{% endif %}
-            {% if entry.feed.source == 'TW' %}<img src="{% get_static_prefix %}img/twitter_21.png" />{% endif %}
-            {% if entry.feed.source == 'RA' %}<img src="{% get_static_prefix %}img/rss_21.png" />{% endif %}
-            <a class="feed" href="{{ entry.feed.url }}"><strong>{{ entry.feed.title }}</strong></a>
-            </p>
-            <p><em>Posted {{ entry.posted_on|timesince }} ago</em></p>
-            <p>
-            <a class="content" href="{{ entry.url }}">
-                {{ entry.content|safe|truncatewords:50 }}
-            </a>
-            </p>
-            </li>
-            {% endfor %}
-        </ol>
-        {% else %}
-        <p>There don't seem to be any recent entries.</p>
-        {% endif %}
-        {% feincms_render_region feincms_page "sidebar" request %}
-    </div>
+<div id="newsfeed" class="grid_4">
+  <h2>Social Media</h2> 
+  <p>Stay updated with all 13 of our member groups!<br/>
+  <a href="/feeds/search"><em>Search social media »</em></a></p>
+  {% load feedeater_tags %}
+  {% get_latest_entries %}
+  {% if latest_entries %}
+  <ol>
+    {% for entry in latest_entries|slice:":5" %}
+    <li>
+    <p>
+    {% if entry.feed.source == 'FB' %}<img src="{% get_static_prefix %}img/facebook_21.png" />{% endif %}
+    {% if entry.feed.source == 'TW' %}<img src="{% get_static_prefix %}img/twitter_21.png" />{% endif %}
+    {% if entry.feed.source == 'RA' %}<img src="{% get_static_prefix %}img/rss_21.png" />{% endif %}
+    <a class="feed" href="{{ entry.feed.url }}"><strong>{{ entry.feed.title }}</strong></a>
+    </p>
+    <p><em>Posted {{ entry.posted_on|timesince }} ago</em></p>
+    <p>
+    <a class="content" href="{{ entry.url }}">
+      {{ entry.content|safe|truncatewords:25 }}
+    </a>
+    </p>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>There don't seem to be any recent entries.</p>
+  {% endif %}
+  {% feincms_render_region feincms_page "sidebar" request %}
 </div>
 {% endblock %}

@@ -29,12 +29,13 @@ a:hover { text-decoration: underline; }
 .nav li {
   float:left;
   position:relative;
+  margin-left:0;
 }
 
 .nav a {
   display:block;
   color:#333;
-  background:white;
+  background:none;
   text-decoration:none;
 }
 
@@ -67,7 +68,7 @@ a:hover { text-decoration: underline; }
   margin-top:5px;
 }
 #sub a {
-  padding:5px 10px 5px 10px;
+  padding:5px 10px 10px 10px;
 }
 #sub a:hover {
   text-decoration:none;
@@ -75,6 +76,9 @@ a:hover { text-decoration: underline; }
 #sub .active {
   margin-top:0px;
   border-top: #a2e663 solid 5px;
+}
+#sub li.active a {
+  background:url(/static/img/page-arrowup.png) no-repeat center bottom; 
 }
 
 
@@ -149,6 +153,7 @@ h3 {
   border-radius:0px 10px 10px 0px;
   padding:10px;
   margin-bottom:5px;
+  margin-left:0;
   font-size:12px;
   background:#eeefff;
   -moz-box-shadow: 0 0 1px #888;
@@ -161,11 +166,11 @@ h3 {
 }
 
 #newsfeed ol li p img { float: right; }
-#newsfeed p { margin-bottom:0; }
+#newsfeed li p { margin-bottom:0; }
 
 #newsfeed a.content { color: #333; }
 
-#content { margin-top: 21px; min-height:100%; }
+#content { margin-top: 20px; min-height:100%; }
 
 p { margin-bottom: 21px; }
 
@@ -208,3 +213,5 @@ ol, ul { margin-bottom: 21px; }
 }
 
 .downloads { height:90px; border-top: 1px solid gray; padding-top:4px;}
+
+hr#pageborder { margin-top: -1px; border-color:#aaa; }

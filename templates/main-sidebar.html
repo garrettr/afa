@@ -2,13 +2,11 @@
 {% load applicationcontent_tags feincms_tags feincms_page_tags %}
 
 {% block content %}
-<div id="content" class="container_12">
-    <div id="main" class="grid_8">
-        {% feincms_render_region feincms_page "main" request %}
-    </div>
+<div id="main" class="grid_8">
+  {% feincms_render_region feincms_page "main" request %}
+</div>
 
-    <div id="sidebar" class="grid_4">
-        {% feincms_render_region feincms_page "sidebar" request %}
-    </div>
+<div id="sidebar" class="grid_4">
+  {% feincms_render_region feincms_page "sidebar" request %}
 </div>
 {% endblock %}
