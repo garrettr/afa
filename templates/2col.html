@@ -2,13 +2,13 @@
 {% load applicationcontent_tags feincms_tags feincms_page_tags %}
 
 {% block content %}
-<div class="leftcol">
+<div class="leftcol rtext">
   <div class="block">
     {% feincms_render_region feincms_page "main" request %}
   </div>
 </div>
 
-<div class="rightcol">
+<div class="rightcol rtext">
   {% for content in feincms_page.content.sidebar %}
   <div class="block">
     {% feincms_render_content content request %}
