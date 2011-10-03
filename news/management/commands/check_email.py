@@ -146,6 +146,8 @@ class Command(BaseCommand):
                                     (header.upper(), msg[header])
                                 )
                         process_email(msg)
+            else:
+                log.DEBUG('No unread messages found. Exiting.')
         finally:
             try:
                 c.close()
