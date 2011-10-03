@@ -1,13 +1,5 @@
-html {
-  font: 14px/1.5 "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
-  color: #333;
-}
-
-body {
-}
-
-a { color: #499DF2; text-decoration:none; }
-a:hover { text-decoration: underline; }
+a { color: #339; text-decoration:none; }
+a:hover { color:blue; text-decoration: underline; }
 
 #stripe {  
   border-top:5px solid #a2e663;
@@ -154,7 +146,7 @@ h3 {
   padding:10px;
   margin-bottom:5px;
   margin-left:0;
-  font-size:12px;
+  font-size:14px;
   background:#eeefff;
   -moz-box-shadow: 0 0 1px #888;
   -webkit-box-shadow: 0 0 1px #888;
