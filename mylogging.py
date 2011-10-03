@@ -7,8 +7,15 @@ Thanks to http://www.saltycrane.com/blog/2009/10/notes-python-logging/
 import logging
 import sys
 
-DEBUG_LOG_FILENAME = '/var/log/test-debug.log'
-WARNING_LOG_FILENAME= '/var/log/test-warning.log'
+from django.conf import settings
+
+try:
+    DEBUG_LOG_FILENAME = settings.DEBUG_LOG_FILENAME
+    WARNING_LOG_FILENAME = settings.WARNING_LOG_FILENAME
+except ImportError:
+    # just for testing
+    DEBUG_LOG_FILENAME = '/tmp/debug.log'
+    WARNING_LOG_FILENAME = '/tmp/warning.log'
 
 # set up formatting
 formatter = logging.Formatter('[%(asctime)s] %(levelno)s (%(process)d) %(module)s: %(message)s')
