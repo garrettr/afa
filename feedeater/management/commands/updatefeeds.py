@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from feedeater.models import Entry, Feed
 
+import mylogging as LOG
+
 class Command(BaseCommand):
     args = 'none'
     help = '''
@@ -11,6 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         feeds = Feed.objects.all()
         for f in feeds:
-            print "Updating %s..." % f.title
+            LOG.debug("Updating %s..." % f.title)
             f.update_entries()
-        print "Done."
+        LOG.debug("Done.")
