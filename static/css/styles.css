@@ -26,8 +26,7 @@ body {
 }
 
 .post {
-   display:block;
-   clear:both;
+  margin-bottom:10px;
 }
 
 .snapshot {
@@ -37,8 +36,9 @@ body {
 }
 
 .newsleft {
-   float:left;
-   margin-right:10px;
+  float:left;
+  margin-right:12px;
+  margin-top:6px;
 }
 
 ol.socialfeed {
@@ -56,13 +56,13 @@ ol.socialfeed a.feed:hover { text-decoration:underline; }
 
 ol.socialfeed li p img { float:right; }
 
-#leftnews {
+.leftcol {
    width:660px;
    float:left;
    margin-right:20px;
 }
 
-#rightfeeds {
+.rightcol {
    float:left;
    width:280px;
 }
@@ -73,6 +73,7 @@ ol.socialfeed li p img { float:right; }
 
 p.content { border-bottom:1px dotted silver; }
 a.readmore { float:right; font-style:italic; }
+div.post a.readmore { text-align:right; float:none; }
 
 .block a {
    color: #437BDE;
@@ -142,3 +143,10 @@ a.readmore { float:right; font-style:italic; }
 }
 
 img.ribbon { position:relative; left:-27px;}
+
+/* -------------------- */
+/*     Clearfix         */
+/* -------------------- */
+.clearfix:before, .clearfix:after { content: "020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }

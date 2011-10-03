@@ -1,18 +1,15 @@
 {% load feincms_thumbnail %}
 <div id="entry_archive">
-    {# <h2>Recent News</h2> #}
-    <h2>What's next?</h2>
-{% for post in latest %}
-<div class="post">
-    <h3>{{ post.headline }}</h3>
-    <p>
-    <a href="{{ post.photo.file.url }}">
-        <img style="float:right; margin-left:21px; margin-bottom:21px;" src='{{ post.photo.file|thumbnail:"200x200" }}' />
+  {% for post in latest %}
+  <div class="post">
+    <a class="frame" href="{{ post.photo.file.url }}">
+      <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"200x200" }}' />
     </a>
-    <span class="date"><em>Posted on:</em> {{ post.pub_date|date:"d.m.Y" }}</span>
-    {{ post.body|safe|truncatewords_html:100 }}
-    <a href="{{ post.get_absolute_url }}">Read more »</a>
+    <h3>{{ post.headline }}</h3>
+    <span class="date">Posted on: {{ post.pub_date|date:"F j, Y" }}</span>
+    <p>{{ post.body|removetags:"p br"|safe|truncatewords_html:30 }}
+    <a class="readmore" href="{{ post.get_absolute_url }}">Read more »</a>
     </p>
-</div>
-{% endfor %}
+  </div>
+  {% endfor %}
 </div>

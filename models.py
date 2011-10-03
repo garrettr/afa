@@ -11,21 +11,12 @@ from feincms.content.application.models import ApplicationContent
 
 Page.register_templates(
     {
-    'key': 'main-sidebar',
-    'title': 'Main -> Sidebar',
-    'path': 'main-sidebar.html',
+    'key': '2col',
+    'title': 'Two Column',
+    'path': '2col.html',
     'regions': (
         ('main', 'Main region'),
         ('sidebar', 'Sidebar', 'inherited'),
-        ),
-    },
-    {
-    'key': 'sidebar-main',
-    'title': 'Sidebar -> Main',
-    'path': 'sidebar-main.html',
-    'regions': (
-        ('sidebar', 'Sidebar', 'inherited'),
-        ('main', 'Main region'),
         ),
     },
     {
@@ -37,22 +28,102 @@ Page.register_templates(
     )
     },
     {
-    'key': 'three-col',
-    'title': 'Three Column',
-    'path': '3col.html',
-    'regions': (
-        ('leftcol', 'Left Column'),
-        ('centercol', 'Center Column'),
-        ('rightcol', 'Right Column'),
-        )
-    },
-    {
-    'key': 'Home',
-    'title': 'Home (with newsfeed)',
+    'key': 'home',
+    'title': 'Home',
     'path': 'home.html',
     'regions': (
-        ('main', 'Main region'),
+        ('subhead', 'Under Header'),
+        ('news', 'News'),
+        ('calendar', 'Calendar'),
         ('sidebar', 'Sidebar', 'inherited'),
+        ),
+    },
+    {
+    'key': 'alliance-ourmission',
+    'title': 'The Alliance -> Our Mission',
+    'path': 'alliance-ourmission.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'alliance-howwework',
+    'title': 'The Alliance -> How We Work',
+    'path': 'alliance-howwework.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'alliance-partnergroups',
+    'title': 'The Alliance -> Partner Groups',
+    'path': 'alliance-partnergroups.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'alliance-history',
+    'title': 'The Alliance -> History',
+    'path': 'alliance-history.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'background-whatismtr',
+    'title': 'Background -> What is MTR?',
+    'path': 'background-whatismtr.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'background-whatisappalachia',
+    'title': 'Background -> What is Appalachia?',
+    'path': 'background-whatisappalachia.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'resources-printablematerials',
+    'title': 'Resources -> Printable Materials', 
+    'path': 'resources-printablematerials.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'resources-images',
+    'title': 'Resources -> Images', 
+    'path': 'resources-images.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'resources-links',
+    'title': 'Resources -> Links', 
+    'path': 'resources-links.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'resources-powerpointpresentations',
+    'title': 'Resources -> Powerpoint Presentations', 
+    'path': 'resources-powerpointpresentations.html',
+    'regions': (
+        ('main', 'Main region'),
+        ),
+    },
+    {
+    'key': 'donate',
+    'title': 'Donate',
+    'path': 'donate.html',
+    'regions': (
+        ('main', 'Main region'),
         ),
     },
 )
