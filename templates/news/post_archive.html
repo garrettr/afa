@@ -1,6 +1,6 @@
 {% load feincms_thumbnail %}
 <div id="entry_archive">
-  {% for post in latest %}
+  {% for post in latest|slice:":3" %}
   <div class="post">
     <a class="frame" href="{{ post.photo.file.url }}">
       <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"100x100" }}' />
