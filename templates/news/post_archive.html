@@ -3,7 +3,7 @@
   {% for post in latest %}
   <div class="post">
     <a class="frame" href="{{ post.photo.file.url }}">
-      <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"200x200" }}' />
+      <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"100x100" }}' />
     </a>
     <h3>{{ post.headline }}</h3>
     <span class="date">Posted on: {{ post.pub_date|date:"F j, Y" }}</span>
