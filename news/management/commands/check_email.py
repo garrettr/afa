@@ -147,7 +147,7 @@ class Command(BaseCommand):
                                 )
                         process_email(msg)
             else:
-                log.DEBUG('No unread messages found. Exiting.')
+                LOG.debug('No unread messages found. Exiting.')
         finally:
             try:
                 c.close()
