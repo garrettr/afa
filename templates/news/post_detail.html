@@ -1,10 +1,10 @@
 {% load feincms_thumbnail %}
-<div class="post">
+<div class="post rtext">
     <a href="{{ object.photo.file.url }}">
         <img style="float:right; margin-right:12px;" src='{{ object.photo.file|thumbnail:"200x200" }}' />
     </a>
     <h2>{{ object.headline }}</h2>
-    <span class="date">{{ object.pub_date|date:"d.m.Y" }}</span>
+    <p><span class="date">Posted: {{ object.pub_date|date:"F j, Y" }}</span></p>
     {{ object.body|safe }}
     {% if object.media_files %}
     <h2>Downloads</h2>

@@ -98,6 +98,10 @@ li {
   margin-bottom:10px;
 }
 
+.date {
+  font-style:italic;
+}
+
 .snapshot {
    border:1px #666 solid;
    padding:6px;
