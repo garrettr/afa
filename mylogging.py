@@ -12,7 +12,7 @@ from django.conf import settings
 try:
     DEBUG_LOG_FILENAME = settings.DEBUG_LOG_FILENAME
     WARNING_LOG_FILENAME = settings.WARNING_LOG_FILENAME
-except ImportError:
+except AttributeError:
     # just for testing
     DEBUG_LOG_FILENAME = '/tmp/debug.log'
     WARNING_LOG_FILENAME = '/tmp/warning.log'
