@@ -10,6 +10,7 @@
     <p>{{ post.body|removetags:"p br"|safe|truncatewords_html:30 }}
     <a class="readmore" href="{{ post.get_absolute_url }}#news">Read more »</a>
     </p>
+    <div class="clearfix"></div>
   </div>
   {% endfor %}
 </div>
