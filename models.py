@@ -132,6 +132,8 @@ Page.create_content_type(RichTextContent)
 Page.create_content_type(SectionContent, 
         TYPE_CHOICES = (
             ('block', _(u'block')),
+            ('imageleft', _(u'image (left)')),
+            ('imageright', _(u' image (right)')),
         )
     )
 

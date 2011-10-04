@@ -145,6 +145,18 @@ ol.socialfeed li p img { float:right; }
    clear:both;
 }
 
+.left {
+  float: left;
+  margin-right:15px;
+  margin-bottom:10px;
+}
+
+.right {
+  float:right;
+  margin-left:15px;
+  margin-bottom:10px;
+}
+
 p.content { border-bottom:1px dotted silver; }
 a.readmore { float:right; font-style:italic; }
 div.post a.readmore { text-align:right; float:none; }

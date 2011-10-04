@@ -1,0 +1,7 @@
+<h2>{{ content.title }}</h2>
+
+{% if content.mediafile %}
+<a href="{{ content.mediafile.file.url }}"><img class="left snapshot" src="{{ content.mediafile.file.url }}" /></a>
+{% endif %}
+
+{{ content.richtext|safe }}
