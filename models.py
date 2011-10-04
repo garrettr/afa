@@ -129,6 +129,11 @@ Page.register_templates(
 )
 
 Page.create_content_type(RichTextContent)
+Page.create_content_type(SectionContent, 
+        TYPE_CHOICES = (
+            ('block', _(u'block')),
+        )
+    )
 
 from django.db import models
 from feincms.module.medialibrary.models import MediaFile
