@@ -1,15 +1,20 @@
 {% load feincms_thumbnail %}
 <div class="post rtext">
+
+    {% if object.photo %}
     <a href="{{ object.photo.file.url }}">
         <img style="float:right; margin-right:12px;" src='{{ object.photo.file|thumbnail:"200x200" }}' />
     </a>
+    {% endif %}
+
     <h2>{{ object.headline }}</h2>
     <p><span class="date">Posted: {{ object.pub_date|date:"F j, Y" }}</span></p>
     {{ object.body|safe }}
-    {% if object.media_files %}
+
+    {% if object.media_files.all %}
     <h2>Downloads</h2>
     {% for media_file in object.media_files.all %}
-    <div class="downloads">
+    <div class="download">
     {% if media_file.type == "image" %}
     {# add a small thumbnail #}
     <a href="{{ media_file.file.url }}">
@@ -66,9 +71,10 @@
     <span class="type">Type: {{ media_file.type }}</span>
     {% endif %}
     </p>
+    <div class="clearfix"></div>
     </div>
     {% endfor %}
     {% endif %}
 
-    <a href="/#news">« Back to News</a>
+    <p><a href="/#news">« Back to News</a></p>
 </div>

@@ -22,6 +22,15 @@ div.rtext h6 {
   margin-bottom: 24px;
 }
 
+/* subtle borders under headers
+div.rtext h1,
+div.rtext h2,
+div.rtext h3,
+div.rtext h4,
+div.rtext h5,
+div.rtext h6 { border-bottom: 1px dotted silver; }
+*/
+
 div.rtext p:last-child {
   margin-bottom:0px;
 }
@@ -228,3 +237,4 @@ img.ribbon { position:relative; left:-27px;}
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
 
+.download { border-bottom: 1px dotted silver; margin-bottom:13px;}
