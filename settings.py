@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     #'feedit',
     'feedeater',
     'news',
+    'snippets',
 )
 
 # A sample logging configuration. The only tangible logging

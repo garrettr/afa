@@ -223,5 +223,6 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
 Page.register_extensions('accent',)
 
 Page.create_content_type(ApplicationContent, APPLICATIONS=(
-    ('news.urls', 'News application'),
+    ('news.urls', 'News'),
+    ('snippets.urls', 'Snippets'),
 ))

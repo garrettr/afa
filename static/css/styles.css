@@ -250,3 +250,5 @@ img.ribbon { position:relative; left:-27px;}
 .clearfix { zoom: 1; }
 
 .download { border-bottom: 1px dotted silver; margin-bottom:13px;}
+
+.snippet-photo { float:right; }

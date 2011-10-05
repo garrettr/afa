@@ -1,0 +1,14 @@
+{% if snippet %}
+
+{% if snippet.photo %}
+{% load feincms_thumbnail %}
+<a href="{{ snippet.photo.file.url }}"><img class="snippet-photo" src="{{ snippet.photo.file|thumbnail:"400x50" }}"></a>
+{% endif %}
+
+{{ snippet.body|safe }}
+
+{% if snippet.photo %}<div class="clearfix"></div>{% endif %}
+
+{% else %}
+<p>Couldn't find anything to show you here!</p>
+{% endif %}

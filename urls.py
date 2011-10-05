@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 
     url(r'^news/', include('news.urls')),
     url(r'^feeds/', include('feedeater.urls')),
+    url(r'^snippets/', include('snippets.urls')),
 
 )
 
