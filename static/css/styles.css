@@ -252,3 +252,6 @@ img.ribbon { position:relative; left:-27px;}
 .download { border-bottom: 1px dotted silver; margin-bottom:13px;}
 
 .snippet-photo { float:right; }
+
+div#header { margin-bottom:20px; }
+body#home div#header { margin-bottom:0px; }
