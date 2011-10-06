@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Search Social Media</title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/feeds.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery.highlight-3.yui.js"></script>
@@ -13,7 +14,7 @@
       <a href="/">« Home</a>
       <div id="f">
         <form>
-          <input type="text" name="search" id="search" value="Start typing to search..."/><br />
+          <input type="text" name="search" id="search" value="Type here to search..."/><br />
           <label for="sort">Sort:</label>
           <input type="radio" name="sort" id="sort" value="desc" checked />Descending<br />
           <input type="radio" name="sort" id="sort" value="asc" />Ascending<br />

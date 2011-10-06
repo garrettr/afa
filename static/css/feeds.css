@@ -42,8 +42,8 @@ ol#results {
 }
 
 ol#results li {
-    padding:10px;
-    border-bottom: 1px solid gray;
+    padding:10px 0px;
+    border-bottom: 1px solid silver;
 }
 
 ol#results a {
@@ -61,4 +61,8 @@ ol#results .feedpic { float:left; padding-right:16px; padding-top: 2px;}
 .highlight { background-color:#FFFFAD; }
 
 .feed { font-weight:bold;}
-.date { float:right; font-style:italic;}
+.date { float:right; }
+
+ol#results a.readmore { 
+   color: #437BDE;
+}

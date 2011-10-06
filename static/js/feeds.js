@@ -1,8 +1,23 @@
+var truncate_words = function(string, n) {
+    // return string limited to n words
+    words = string.split(" ");
+    if( words.length <= n ) {
+        return string; // just return string
+    }
+    trunc = "";
+    for(var i=0; i<n; i++) {
+        trunc += words[i] + " ";
+    }
+    return trunc;
+}
+
 var get_date_string = function(date) {
     d = new Date(date); // javascript's built-in Date object does the heavy lifting
     weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    fmt = [weeks[d.getDay()], months[d.getMonth()], d.getDate(), d.getFullYear()];
+    months_abbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    //fmt = [weeks[d.getDay()], months[d.getMonth()], d.getDate(), d.getFullYear()];
+    fmt = [months_abbr[d.getMonth()], d.getDate(), d.getFullYear()];
     return fmt.join(" ");
 }
 
@@ -30,7 +45,7 @@ var build_list = function(data) {
         }
         // feed name
         html += '<span class="feed">' + data[i].fields.feed[0] + '</span></a>';
-        html += '<span class="date">Posted on: ' + get_date_string(data[i].fields.posted_on) + '</span><br />';
+        html += '<span class="date">' + get_date_string(data[i].fields.posted_on) + '</span><br />';
         // end feed url - wraps around feed name
         
         // print title if NOT a tweet - for tweets, title = content = tweet
@@ -40,7 +55,9 @@ var build_list = function(data) {
         }
 
 
-        html += '<p>' + data[i].fields.content + '</p>';
+        html += '<p class="feed-content">' + truncate_words(data[i].fields.content, 50) + ' ';
+        html += '<a class="readmore" href="' + data[i].fields.url + '">Read more »</a>';
+        html += '</p>';
         html += "</li>";
     }
     html += "</ol>";
@@ -48,7 +65,7 @@ var build_list = function(data) {
 }
 
 var search_request = function(query, sort_order) {
-  if( query != "" ) {
+  if( query.length != '') {
     data = { q:query, so:sort_order };
     $.getJSON('ajax/', data,
     function(data) {
@@ -70,6 +87,7 @@ var search_request = function(query, sort_order) {
 
 $(document).ready(function () {
 
+  // blur initially, "Type here to search..."
   $('input#search').addClass("blurField");
 
   $('input#search').focus(function() {
