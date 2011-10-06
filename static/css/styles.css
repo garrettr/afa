@@ -253,10 +253,8 @@ img.ribbon { position:relative; left:-27px;}
 
 .snippet-photo { float:right; }
 
-/*
-div#header { margin-bottom:20px; position:relative; }
+div#header { margin-bottom:20px; }
 body#home div#header { margin-bottom:0px; }
-*/
 
 .credit {
     font-size:12px;
