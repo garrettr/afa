@@ -39,6 +39,11 @@ div.rtext img {
   margin-bottom: 24px;
 }
 
+.center-block {
+  display:block;
+  margin:0 auto;
+}
+
 /*--- HEADINGS ---*/
 /* magic number is 15 * 1.6 = 24 */
 h1, h2, h3, h4, h5, h6 { font-weight:bold; }
