@@ -35,6 +35,10 @@ div.rtext p:last-child {
   margin-bottom:0px;
 }
 
+div.rtext img {
+  margin-bottom: 24px;
+}
+
 /*--- HEADINGS ---*/
 /* magic number is 15 * 1.6 = 24 */
 h1, h2, h3, h4, h5, h6 { font-weight:bold; }
