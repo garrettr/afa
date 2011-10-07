@@ -60,6 +60,7 @@ Page.register_templates(
     'path': 'alliance-partnergroups.html',
     'regions': (
         ('main', 'Main region'),
+        ('sidebar', 'Sidebar'),
         ),
     },
     {
