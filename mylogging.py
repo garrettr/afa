@@ -9,8 +9,6 @@ import sys
 
 from django.conf import settings
 
-MAX_LOG_FILESIZE = 1024*100 # 100K
-
 try:
     DEBUG_LOG_FILENAME = settings.DEBUG_LOG_FILENAME
     WARNING_LOG_FILENAME = settings.WARNING_LOG_FILENAME
@@ -28,20 +26,12 @@ sh.setLevel(logging.DEBUG)
 sh.setFormatter(formatter)
 
 # set up logging to a file for all levels DEBUG and higher
-fh = logging.RotatingFileHandler(
-        DEBUG_LOG_FILENAME,
-        maxBytes=MAX_LOG_FILESIZE,
-        backupCount=5
-    )
+fh = logging.FileHandler(DEBUG_LOG_FILENAME)
 fh.setLevel(logging.DEBUG)
 fh.setFormatter(formatter)
 
 # set up logging to a file for all levels WARNING and higher
-fh2 = logging.RotatingFileHandler(
-        WARNING_LOG_FILENAME,
-        maxBytes=MAX_LOG_FILESIZE,
-        backupCount=5
-    )
+fh2 = logging.FileHandler(WARNING_LOG_FILENAME)
 fh2.setLevel(logging.WARN)
 fh2.setFormatter(formatter)
 
