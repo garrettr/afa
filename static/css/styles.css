@@ -35,14 +35,10 @@ div.rtext p:last-child {
   margin-bottom:0px;
 }
 
-div.rtext img {
+div.rtext div.image {
   margin-bottom: 24px;
 }
 
-.center-block {
-  display:block;
-  margin:0 auto;
-}
 
 /*--- HEADINGS ---*/
 /* magic number is 15 * 1.6 = 24 */
@@ -273,4 +269,9 @@ body#home div#header { margin-bottom:0px; }
     position:absolute;
     bottom:0;
     left:0;
+}
+
+.center-block {
+  display:block;
+  margin:0 auto;
 }
