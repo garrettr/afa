@@ -156,7 +156,7 @@ class ImageContent(models.Model):
 
     SIZE_CHOICES = (
         # based on 960.gs
-        (u'60x60', u'thumbnail'),
+        (u'80x80', u'thumbnail'),
         (u'220x9999', u'small'),
         (u'300x9999', u'medium'),
         (u'460x9999', u'large'),

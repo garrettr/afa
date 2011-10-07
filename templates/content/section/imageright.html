@@ -1,7 +1,10 @@
 <h2>{{ content.title }}</h2>
 
 {% if content.mediafile %}
-<a href="{{ content.mediafile.file.url }}"><img class="right snapshot" src="{{ content.mediafile.file.url }}" /></a>
+{% load feincms_thumbnail %}
+<div class="image">
+  <a href="{{ content.mediafile.file.url }}"><img class="right snapshot" src="{{ content.mediafile.file|thumbnail:"400x9999" }}" alt="{{ content.mediafile.translation.caption }}" title="{{ content.mediafile.translation.caption }} &copy; {{ content.mediafile.copyright }}" /></a>
+</div>
 {% endif %}
 
 {{ content.richtext|safe }}

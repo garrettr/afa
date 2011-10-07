@@ -275,3 +275,18 @@ body#home div#header { margin-bottom:0px; }
   display:block;
   margin:0 auto;
 }
+
+.image {
+    /* watch out - will this break layout later? */
+    position:relative;
+}
+
+.image-text {
+    position:absolute;
+    bottom:7px;
+    right:15px;
+    padding:5px;
+    color:white;
+    background:rgba(0,0,0,0.5);
+    font-size:14px;
+}

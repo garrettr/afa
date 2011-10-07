@@ -3,5 +3,18 @@
 {{ content.richtext|safe }}
 
 {% if content.mediafile %}
+{% load feincms_thumbnail %}
+<div class="image">
+  <a href="{{ content.mediafile.file.url }}"><img class="center-block snapshot" src="{{ content.mediafile.file|thumbnail:"600x9999" }}" alt="{{ content.mediafile.translation.caption }}" title="{{ content.mediafile.translation.caption }} &copy; {{ content.mediafile.copyright }}" /></a>
+  <div class="image-text">
+    {% if content.mediafile.translation.caption %}<span class="caption">{{ content.mediafile.translation.caption }}</span><br />{% endif %}
+    {# {% if content.mediafile.copyright %}<span class="copyright">&copy; {{ content.mediafile.copyright }}</span>{% endif %} #}
+  </div>
+</div>
+{% endif %}
+{% comment %}
+assume it's an image for now
+{% if content.mediafile %}
 <a href="{{ content.mediafile.file.url }}">{{ content.mediafile }}</a>
 {% endif %}
+{% endcomment %}
