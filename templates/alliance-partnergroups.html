@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="rightcol rtext">
+<div class="rightcol">
   <div id="socialmedia" class="block">
     <img class="ribbon" src="{% get_static_prefix %}img/socialmedia-ribbon.png">
     {% load feedeater_tags %}
@@ -36,13 +36,15 @@
     <p>There don't seem to be any recent entries.</p>
     {% endif %}
 
-    {% feincms_render_region feincms_page "sidebar" request %}
   </div>
-  {% for content in feincms_page.content.sidebar %}
-  <div class="block">
-    {% feincms_render_content content request %}
+  {% feincms_render_region feincms_page "sidebar" request %}
+  <div class="rtext"
+    {% for content in feincms_page.content.sidebar %}
+    <div class="block">
+      {% feincms_render_content content request %}
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 
 <div class="clearfix"></div>
