@@ -35,16 +35,14 @@
     {% else %}
     <p>There don't seem to be any recent entries.</p>
     {% endif %}
+  </div>
 
-  </div>
   {% feincms_render_region feincms_page "sidebar" request %}
-  <div class="rtext">
-    {% for content in feincms_page.content.sidebar %}
-    <div class="block">
-      {% feincms_render_content content request %}
-    </div>
-    {% endfor %}
+  {% for content in feincms_page.content.sidebar %}
+  <div class="rtext block">
+    {% feincms_render_content content request %}
   </div>
+  {% endfor %}
 </div>
 
 <div class="clearfix"></div>
