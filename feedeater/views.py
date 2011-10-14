@@ -63,7 +63,7 @@ def build_search_queryset(query_string, search_fields):
 
 def recent_entries(request):
     ''' Returns list of entries, most recent first '''
-    recent_entries = Entry.objects.all().order_by('-posted_on')
+    recent_entries = Entry.objects.order_by('-posted_on')
     return render_to_response("feedeater/recent_entries.html",
             { 'recent_entries': recent_entries },
             context_instance=RequestContext(request),
