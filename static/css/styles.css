@@ -161,13 +161,13 @@ ol.socialfeed li p img { float:right; }
 
 .left {
   float: left;
-  margin-right:15px;
+  margin-right:16px;
   margin-bottom:10px;
 }
 
 .right {
   float:right;
-  margin-left:15px;
+  margin-left:16px;
   margin-bottom:10px;
 }
 
@@ -271,22 +271,21 @@ body#home div#header { margin-bottom:0px; }
     left:0;
 }
 
-.center-block {
-  display:block;
-  margin:0 auto;
+.center {
+    margin:0 auto;
 }
 
 .image {
-    /* watch out - will this break layout later? */
-    position:relative;
 }
 
-.image-text {
-    position:absolute;
-    bottom:7px;
-    right:15px;
-    padding:5px;
-    color:white;
-    background:rgba(0,0,0,0.5);
+.caption {
+    padding-top:6px;
+    color:#444;
+    font-size:14px;
+}
+
+.copyright {
+    float:right;
+    color:#666;
     font-size:14px;
 }

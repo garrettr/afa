@@ -61,7 +61,7 @@ Error on trying to load OVEC Facebook into feedeater. Something to do with the i
 
 GENERAL
 --limit entries from one group on social media feed
-    
+    done, plus applicationcontent refactor 
 --let's just give RAN credit for the video (we also need to give credit for the photos
 
 HOME PAGE
@@ -77,11 +77,14 @@ depends on HEADER IMAGE:
 
 HOW WE WORK PAGE
 --put new drafts in (these were those emails with the conversations of the groups) 
+    done
 --can we add some images or something to break up the space?
 
 WHAT IS MTR?
 --remove photo tag on last image
     = fix captions
+    done. double-check what happens if there's no caption. copyright in
+    hover text.
 
 RESOURCES
 --can we take these down from the live site until we have them?
