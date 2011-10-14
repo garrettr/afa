@@ -61,17 +61,18 @@ def build_search_queryset(query_string, search_fields):
 
     return query
 
-def recent_entries(request):
+def recent_entries(request, limit=5):
     '''
-    Returns list of entries, most recent first
-    Hard-coding 5 entries (for now)
+    Returns list of limit entries, most recent first
     '''
-    if len(Feed.objects.all()) > 5:
+    if len(Feed.objects.all()) >= limit:
         # return most recent entry from each feed
-        all_recent = Entry.objects.order_by('-posted_on')
+        recent_entries = []
+        for feed in Feed.objects.all():
+            recent_entries.append(feed.entries.order_by('-posted_on')[0])
+        recent_entries.sort(key=lambda entry: entry.posted_on, reverse=True)
     else:
-        # return 5 most recent
-        recent_entries = Entry.objects.order_by('-posted_on')
+        recent_entries = Entry.objects.order_by('-posted_on')[:limit]
     return render_to_response("feedeater/recent_entries.html",
             { 'recent_entries': recent_entries },
             context_instance=RequestContext(request),

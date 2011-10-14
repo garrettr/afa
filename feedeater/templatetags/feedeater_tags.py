@@ -6,7 +6,7 @@ def do_latest_entries(parser, token):
 
 class LatestEntriesNode(template.Node):
     def render(self, context):
-        context['latest_entries'] = Entry.objects.all().order_by('-posted_on')[0:10]
+        context['latest_entries'] = Entry.objects.all().order_by('-posted_on')
         return ''
 
 register = template.Library()
