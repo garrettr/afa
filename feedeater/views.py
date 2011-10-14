@@ -62,8 +62,16 @@ def build_search_queryset(query_string, search_fields):
     return query
 
 def recent_entries(request):
-    ''' Returns list of entries, most recent first '''
-    recent_entries = Entry.objects.order_by('-posted_on')
+    '''
+    Returns list of entries, most recent first
+    Hard-coding 5 entries (for now)
+    '''
+    if len(Feed.objects.all()) > 5:
+        # return most recent entry from each feed
+        all_recent = Entry.objects.order_by('-posted_on')
+    else:
+        # return 5 most recent
+        recent_entries = Entry.objects.order_by('-posted_on')
     return render_to_response("feedeater/recent_entries.html",
             { 'recent_entries': recent_entries },
             context_instance=RequestContext(request),
