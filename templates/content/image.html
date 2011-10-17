@@ -8,5 +8,5 @@
   <img src="{% if size %}{{ image.file|thumbnail:size }}{% else %}{{ image.file.url }}{% endif %}" alt="{{ caption }}" />
   </a>
 
-  {% if caption %}<p class="caption">{{ caption }}</p>{% endif %}
+  {% if caption %}<div class="caption"><p class="caption">{{ caption }}</p></div>{% endif %}
 </div>

@@ -2,12 +2,14 @@
 
 {% if content.mediafile %}
 {% load feincms_thumbnail %}
-<div class="image right snapshot">
+<div class="image right">
   <a href="{{ content.mediafile.file.url }}"><img src="{{ content.mediafile.file|thumbnail:"400x9999" }}" alt="{{ content.mediafile.translation.caption }}" title="{{ content.mediafile.translation.caption }} &copy; {{ content.mediafile.copyright }}" /></a>
+  {% comment %}
   <div class="caption">
     {% if content.mediafile.translation.caption %}<span class="caption">{{ content.mediafile.translation.caption }}</span>{% endif %}
     {# {% if content.mediafile.copyright %}<span class="copyright">&copy; {{ content.mediafile.copyright }}</span>{% endif %} #}
   </div>
+  {% endcomment %}
 </div>
 {% endif %}
 

@@ -4,12 +4,14 @@
 
 {% if content.mediafile %}
 {% load feincms_thumbnail feincms_extras %}
-<div class="image center snapshot" style="width:{% if content.mediafile|width < 600 %}{{ content.mediafile|width }}{% else %}600{% endif %}px;"> {# specify width to match thumbnail so it centers properly #}
+<div class="image center" style="width:{% if content.mediafile|width < 600 %}{{ content.mediafile|width }}{% else %}600{% endif %}px;"> {# specify width to match thumbnail so it centers properly #}
   <a href="{{ content.mediafile.file.url }}"><img src="{{ content.mediafile.file|thumbnail:"600x9999" }}" alt="{{ content.mediafile.translation.caption }}" title="{{ content.mediafile.translation.caption }} &copy; {{ content.mediafile.copyright }}" /></a>
+  {% comment %}
   <div class="caption">
     {% if content.mediafile.translation.caption %}<span class="caption">{{ content.mediafile.translation.caption }}</span>{% endif %}
     {# {% if content.mediafile.copyright %}<span class="copyright">&copy; {{ content.mediafile.copyright }}</span>{% endif %} #}
   </div>
+  {% endcomment %}
 </div>
 {% endif %}
 {% comment %}
