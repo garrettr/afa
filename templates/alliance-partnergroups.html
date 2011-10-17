@@ -37,7 +37,6 @@
     {% endif %}
   </div>
 
-  {% feincms_render_region feincms_page "sidebar" request %}
   {% for content in feincms_page.content.sidebar %}
   <div class="rtext block">
     {% feincms_render_content content request %}
