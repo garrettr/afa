@@ -5,7 +5,7 @@
   {% else %}
   <a href="{{ image.file.url }}">
   {% endif %}
-  <img src="{% if size %}{{ image.file|thumbnail:size }}{% else %}{{ image.file.url }}{% endif %} alt="{{ caption }}" class="snapshot {% if align == 0 %}center-block{% else %}{% if align == 1 %}left{% else %}{% if align == 2 %}right{% endif %}{% endif %}{% endif %}" />
+  <img src="{% if size %}{{ image.file|thumbnail:size }}{% else %}{{ image.file.url }}{% endif %}" alt="{{ caption }}" class="snapshot {% if align == 0 %}center-block{% else %}{% if align == 1 %}left{% else %}{% if align == 2 %}right{% endif %}{% endif %}{% endif %}" />
   </a>
 
   {% if caption %}<p class="caption">{{ caption }}</p>{% endif %}
