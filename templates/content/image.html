@@ -1,5 +1,5 @@
 {% load feincms_thumbnail feincms_extras %}
-<div class="image {% if align == 0 %}center{% else %}{% if align == 1 %}left{% else %}{% if align == 2 %}right{% endif %}{% endif %}{% endif %}" style="width:{% if size %}{{ size|slice:":3" }}{% else %}{{ image|width }}{% endif %}px"> {# assumes size's X <= 999 #}
+<div class="image {% if align == 0 %}center{% else %}{% if align == 1 %}left{% else %}{% if align == 2 %}right{% endif %}{% endif %}{% endif %}{% if caption %} snapshot {% endif %}" style="width:{% if size %}{{ size|slice:":3" }}{% else %}{{ image|width }}{% endif %}px"> {# assumes size's X <= 999 #}
   {% if link %}
   <a href="{{link}}">
   {% else %}
