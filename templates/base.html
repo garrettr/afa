@@ -29,9 +29,11 @@
           {% endfor %}
         </div>
 
+        {% block header %}
         <div id="header">
-          <img src="{{ STATIC_URL }}img/header.jpg">
+          <img src="{{ STATIC_URL }}img/header-2.jpg">
         </div>
+        {% endblock %}
 
         <div id="content"> 
           {% block content %}{% endblock %}
