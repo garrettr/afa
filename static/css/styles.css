@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background:url('/static/img/gradient-rock.jpg') no-repeat right top #9ADAFE;
+  background:url('/static/img/gradient-rock.jpg') no-repeat fixed right top #9ADAFE;
 }
 
 /* -------------------- */
