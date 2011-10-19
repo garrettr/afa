@@ -105,6 +105,7 @@ li {
    margin-bottom: 20px;
    background: white;
    box-sizing: border-box;
+   border:1px solid #ddd;
 }
 
 .post {
