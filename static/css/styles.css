@@ -298,9 +298,11 @@ body#home div#header { margin-bottom:0px; }
 }
 .slides_container {
   width:930px;
+  height:72px;
 }
 .slides_container div {
   width:930px;
+  height:72px;
   display:block;
 }
 .pagination {
