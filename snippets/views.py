@@ -20,3 +20,14 @@ def random_snippet(request):
             { 'snippet': snippet },
             context_instance=RequestContext(request),
         )
+
+def all_as_gallery(request):
+    '''
+    Returns all snippets in a list
+    so they can be rendered in a gallery with slides.js
+    '''
+    snippets = Snippet.objects.all()
+    return render_to_response("snippets/all_as_gallery.html",
+            { 'snippets': snippets },
+            context_instance=RequestContext(request),
+        )

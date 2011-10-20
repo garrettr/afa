@@ -1,0 +1,28 @@
+<div id="snippets">
+  <div class="slides_container">
+    {% for snippet in snippets %}
+    <div>
+      {% if snippet.photo %}
+      {% load feincms_thumbnail %}
+      <a href="{{ snippet.photo.file.url }}"><img class="snippet-photo" src="{{ snippet.photo.file|thumbnail:"400x50" }}"></a>
+      {% endif %}
+
+      {{ snippet.body|safe }}
+
+      {% if snippet.photo %}<div class="clearfix"></div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<script>
+$(function() {
+  $('#snippets').slides({
+    effect: 'fade',
+    generateNextPrev:true,
+    generatePagination:false
+  });
+});
+</script>
+

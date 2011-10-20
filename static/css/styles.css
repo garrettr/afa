@@ -288,3 +288,27 @@ body#home div#header { margin-bottom:0px; }
     color:#666;
     font-size:14px;
 }
+
+/* ----------------- */
+/*      Slides       */
+/* ----------------- */
+
+#snippets {
+}
+.slides_container {
+  width:930px;
+}
+.slides_container div {
+  width:930px;
+  display:block;
+}
+.pagination {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.pagination .current a {
+  color:red;
+}
+.prev { float: left; }
+.next { float: right; }
