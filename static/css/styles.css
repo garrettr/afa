@@ -210,7 +210,8 @@ div.post a.readmore { text-align:right; float:none; }
 }
 #nav a:hover {
 	/* background:#6b0c36; ORIGINAL */
-    background:#e6e6e6;
+    /* background:#e6e6e6;*/
+    background:#C7EBFF;
 	text-decoration:underline;
 }
 
@@ -241,7 +242,8 @@ div.post a.readmore { text-align:right; float:none; }
 	text-decoration:none;
 }
 #nav li:hover ul li a:hover { /* Here we define the most explicit hover states--what happens when you hover each individual link. */
-	background:#e6e6e6;
+	/*background:#e6e6e6;*/
+    background:#C7EBFF;
 }
 
 img.ribbon { position:relative; left:-27px; margin-bottom:4px;}
