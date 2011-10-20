@@ -4,7 +4,7 @@
     <div>
       {% if snippet.photo %}
       {% load feincms_thumbnail %}
-      <a href="{{ snippet.photo.file.url }}"><img class="snippet-photo" src="{{ snippet.photo.file|thumbnail:"400x96" }}"></a>
+      <a href="{{ snippet.photo.file.url }}"><img class="snippet-photo" src="{{ snippet.photo.file|thumbnail:"400x72" }}"></a>
       {% endif %}
 
       {{ snippet.body|safe }}
