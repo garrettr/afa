@@ -255,7 +255,7 @@ img.ribbon { position:relative; left:-27px; margin-bottom:4px;}
 
 .download { border-bottom: 1px dotted silver; margin-bottom:13px;}
 
-.snippet-photo { float:right; }
+.snippet-photo { float:right; margin-left:12px; }
 
 div#header { margin-bottom:20px; }
 body#home div#header { margin-bottom:0px; }
