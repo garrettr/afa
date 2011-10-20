@@ -36,6 +36,7 @@ Page.register_templates(
         ('news', 'News'),
         ('calendar', 'Calendar'),
         ('sidebar', 'Sidebar', 'inherited'),
+        ('contact', 'Contact'),
         ),
     },
     {
