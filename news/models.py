@@ -17,6 +17,7 @@ class Post(models.Model):
     media_files = models.ManyToManyField(MediaFile, related_name='post_mediafiles',
             blank=True, null=True
         )
+    visible = models.BooleanField(default=True)
 
     def __unicode__(self):
         return u'%s' % self.headline

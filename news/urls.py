@@ -4,7 +4,7 @@ from news.models import Post
 
 # p. 73 of PDP
 post_info_dict = {
-    'queryset': Post.objects.all(),
+    'queryset': Post.objects.filter(visible=True),
     'date_field': 'pub_date',
 }
 
