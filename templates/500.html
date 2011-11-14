@@ -2,26 +2,18 @@
 <html>
   <head>
     <title>500 - Internal Server Error | The Alliance for Appalachia</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
-    <style>
-      body { width: 600px; margin:0 auto; color:#333; background:whitesmoke; }
-      #container { margin: 21px 0 21px 0; padding:20px; background:white; border:1px solid silver; box-shadow: 2px 2px 5px #ccc; }
-    </style>
   </head>
 
   <body>
-    <div id="container">
-      <h1>500 - Internal Server Error</h1>
-      <p>Something went wrong and we weren't able to complete your request. Sorry!</p>
-      <p>You can help us by sending us an email at 
-      <a href="mailto:contact@theallianceforappalachia.org?subject=500%20Internal%20Server%20Error">
-        contact@theallianceforappalachia.org
-      </a>
-      and describing the situation where you encountered the error.
-      </p>
-      {% if err_details %}<p>Sorcery: {{ err_details }}</p>{% endif %}
-      <p><a href="/">&laquo; Return to The Alliance for Appalachia</a></p>
-    </div>
+    <h1>500 - Internal Server Error</h1>
+    <p>Something went wrong and we weren't able to complete your request. Sorry!</p>
+    <p>You can help us by sending us an email at 
+    <a href="mailto:contact@theallianceforappalachia.org?subject=500%20Internal%20Server%20Error">
+      contact@theallianceforappalachia.org
+    </a>
+    and describing the situation where you encountered the error.
+    </p>
+    <p><a href="/">&laquo; Return to The Alliance for Appalachia</a></p>
   </body>
 </html>
 
