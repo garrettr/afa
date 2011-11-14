@@ -8,7 +8,7 @@ from feincms.admin.item_editor import FeinCMSInline
 class PostAdmin(admin.ModelAdmin):
     filter_horizontal = ('media_files',)
     raw_id_fields = ('photo', )
-    list_display = ('pub_date', 'headline', 'photo', )
+    list_display = ('headline', 'pub_date', 'visible', 'photo', )
     list_display_links = ('headline', )
     list_filter = ('pub_date',)
     prepopulated_fields = {'slug': ('headline',)}
