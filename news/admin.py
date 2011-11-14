@@ -15,6 +15,16 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug', 'body', )
     list_per_page = 10
 
+    fieldsets = (
+        (None, {
+            'fields': (('headline', 'visible'), 'slug')
+        }),
+        ('Edit', {
+            'fields': ('body', 'photo', 'pub_date', 'media_files'),
+            'classes': ('collapse',),
+        }),
+    )
+
     class Media:
         js = (
             "/static/js/tiny_mce/tiny_mce.js",
