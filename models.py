@@ -130,13 +130,14 @@ Page.register_templates(
     },
 )
 
-Page.create_content_type(RichTextContent)
+Page.create_content_type(RichTextContent, cleanse=True)
 Page.create_content_type(SectionContent, 
         TYPE_CHOICES = (
             ('block', _(u'block')),
             ('imageleft', _(u'image (left)')),
             ('imageright', _(u' image (right)')),
-        )
+        ),
+        cleanse=True,
     )
 
 from django.db import models
