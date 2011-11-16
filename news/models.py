@@ -18,6 +18,8 @@ class Post(models.Model):
             blank=True, null=True
         )
     visible = models.BooleanField(default=True)
+    event_date = models.DateTimeField(default=datetime.now(), blank=True,
+            help_text=_('Optional: Date this event is scheduled'))
 
     def __unicode__(self):
         return u'%s' % self.headline
