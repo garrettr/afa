@@ -6,8 +6,11 @@
       <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"100x100" }}' />
     </a>
     <h3>{{ post.headline }}</h3>
-    <span class="date">Posted on: {{ post.pub_date|date:"F j, Y" }}</span>
-    <p>{{ post.body|removetags:"p br"|safe|truncatewords_html:30 }}
+    <p>
+      <span class="date">Scheduled for {{ post.event_date|date:"F j, Y" }}</span>
+      <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ post.headline }}&dates={{ post.event_date|date:"Ymd/Ymd" }}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="//www.google.com/calendar/images/ext/gc_button6.gif"></a>
+    </p>
+    <p>{{ post.body|removetags:"p br"|safe|truncatewords_html:50 }}
     <a class="readmore" href="{{ post.get_absolute_url }}#news">Read more »</a>
     </p>
     <div class="clearfix"></div>

@@ -109,11 +109,16 @@ li {
 }
 
 .post {
-  margin-bottom:10px;
+  margin-bottom:16px;
+}
+
+#entry_archive {
+  margin-top:8px;
 }
 
 .date {
   font-style:italic;
+  margin-right:1em;
 }
 
 .snapshot {

@@ -8,7 +8,11 @@
     {% endif %}
 
     <h2>{{ object.headline }}</h2>
-    <p><span class="date">Posted: {{ object.pub_date|date:"F j, Y" }}</span></p>
+    <p>
+    <span class="date">Scheduled for {{ object.event_date|date:"F j, Y" }}</span>
+      <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ object.headline }}&dates={{ object.event_date|date:"Ymd/Ymd" }}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="//www.google.com/calendar/images/ext/gc_button6.gif"></a>
+    </p>
+
     {{ object.body|safe }}
 
     {% if object.media_files.all %}
