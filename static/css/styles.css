@@ -198,21 +198,21 @@ div.post a.readmore { text-align:right; float:none; }
 #nav li {
 	float:left;
     margin-left:0px;
-	margin-right:10px;
+	/*margin-right:10px;*/
 	position:relative;
 }
 #nav a {
 	display:block;
-	padding:5px;
-	color:#333;
-	background:white;
+	padding:5px 10px;
+	color:white;
+	background:#5A6D99;
 	text-decoration:none;
+    border-right:1px solid #435170;
 }
 #nav a:hover {
 	/* background:#6b0c36; ORIGINAL */
     /* background:#e6e6e6;*/
-    background:#C7EBFF;
-	text-decoration:underline;
+    background:#3D5285;
 }
 
 /*--- DROPDOWN ---*/
@@ -226,6 +226,7 @@ div.post a.readmore { text-align:right; float:none; }
 #nav ul li {
 	/* padding-top:1px; /* Introducing a padding between the li and the a give the illusion spaced items */
 	float:none;
+    border-top:1px solid #435170;
 }
 #nav ul a {
 	white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
@@ -235,16 +236,15 @@ div.post a.readmore { text-align:right; float:none; }
 }
 #nav li:hover a { /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
 	/* background:#6b0c36; ORIGINAL */
-    background:white;
-	text-decoration:underline;
 }
 #nav li:hover ul a { /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
 	text-decoration:none;
 }
 #nav li:hover ul li a:hover { /* Here we define the most explicit hover states--what happens when you hover each individual link. */
 	/*background:#e6e6e6;*/
-    background:#C7EBFF;
 }
+
+#nav li:hover ul li:last-child a { border-radius: 0 0 10px 10px; }
 
 img.ribbon { position:relative; left:-27px; margin-bottom:4px;}
 
