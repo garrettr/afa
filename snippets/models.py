@@ -10,7 +10,6 @@ class Snippet(models.Model):
     the new website. Appears on the homepage under the header.
     '''
     title = models.CharField(_(u'title'), max_length=200)
-    url = models.CharField(_(u'url'), max_length=255, blank=True)
     body = models.TextField(_(u'body'))
     photo = MediaFileForeignKey(MediaFile, blank=True, null=True, 
             help_text=_('Optional: Pick a snapshot to go along with this post. Will be resized to fit'))
