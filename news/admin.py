@@ -8,19 +8,19 @@ from feincms.admin.item_editor import FeinCMSInline
 class PostAdmin(admin.ModelAdmin):
     filter_horizontal = ('media_files',)
     raw_id_fields = ('photo', )
-    list_display = ('headline', 'pub_date', 'visible', 'photo', )
+    list_display = ('headline', 'event_date', 'visible', 'photo', )
     list_display_links = ('headline', )
-    list_filter = ('pub_date',)
+    list_filter = ('event_date',)
     prepopulated_fields = {'slug': ('headline',)}
     search_fields = ('title', 'slug', 'body', )
     list_per_page = 10
 
     fieldsets = (
         (None, {
-            'fields': (('headline', 'visible'), 'slug')
+            'fields': (('headline', 'visible'), 'slug', 'event_date')
         }),
         ('Edit', {
-            'fields': ('body', 'photo', 'pub_date', 'media_files'),
+            'fields': ('body', 'photo', 'media_files'),
             'classes': ('collapse',),
         }),
     )
