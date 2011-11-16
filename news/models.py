@@ -13,7 +13,6 @@ class Post(models.Model):
     body = models.TextField(_(u'body'), blank=True) # feincms/tinymce richtext widget
     photo = MediaFileForeignKey(MediaFile, blank=True, null=True, 
             help_text=_('Optional: Pick a snapshot to go along with this post. Will be resized to fit'))
-    pub_date = models.DateTimeField(_(u'published on'), default=datetime.now())
     media_files = models.ManyToManyField(MediaFile, related_name='post_mediafiles',
             blank=True, null=True
         )
