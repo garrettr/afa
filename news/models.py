@@ -10,15 +10,26 @@ from feincms.admin.item_editor import FeinCMSInline
 class Post(models.Model):
     headline = models.CharField(_(u'headline'), max_length=100)
     slug = models.SlugField(_(u'slug'), max_length=100)
+    visible = models.BooleanField(default=True)
     body = models.TextField(_(u'body'), blank=True) # feincms/tinymce richtext widget
     photo = MediaFileForeignKey(MediaFile, blank=True, null=True, 
             help_text=_('Optional: Pick a snapshot to go along with this post. Will be resized to fit'))
+
+    # optional attachments
     media_files = models.ManyToManyField(MediaFile, related_name='post_mediafiles',
             blank=True, null=True
         )
-    visible = models.BooleanField(default=True)
-    event_date = models.DateTimeField(default=datetime.now(), blank=True,
-            help_text=_('Optional: Date this event is scheduled'))
+
+    # optional event details
+    start_date = models.DateField(blank=True, null=True,
+            help_text=_('Optional: If this is for an event, when will it start?'))
+    end_date = models.DateField(blank=True, null=True,
+            help_text=_('Optional: If this is for an event, when will it end?'))
+    location = models.CharField(max_length=255, blank=True,
+            help_text=_('Optional: If this is for an event, where will it take \
+            place? Enter a location that Google Maps can resolve.'))
+
+    # timestamp
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
