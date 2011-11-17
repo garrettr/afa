@@ -117,7 +117,6 @@ li {
 }
 
 .date {
-  font-style:italic;
   margin-right:1em;
 }
 
@@ -361,4 +360,18 @@ body#home div#header { margin-bottom:0px; }
 
 .pagination {
   right:16px; 
+}
+
+a.calendar { text-decoration:none; }
+a.calendar span {
+  text-decoration:none;
+  color:#555;
+  border-bottom: 1px dashed silver;
+}
+a.calendar:hover span {
+  color:#333;
+  border-bottom: 1px dashed #333;
+} 
+a.calendar img {
+  margin-right:2px;
 }

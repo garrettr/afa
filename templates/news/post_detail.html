@@ -3,7 +3,7 @@
 
     {% if object.photo %}
     <a href="{{ object.photo.file.url }}">
-        <img style="float:right; margin-right:12px;" src='{{ object.photo.file|thumbnail:"200x200" }}' />
+      <img style="float:right; margin-left:12px;" src='{{ object.photo.file|thumbnail:"240x999" }}' />
     </a>
     {% endif %}
 
@@ -11,8 +11,8 @@
 
     {% if object.start_date and object.end_date %}
     <p>
-      <span class="date">{{ object.start_date|date:"F j, Y" }} - {{ object.end_date|date:"F j, Y" }}</span>
-      <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ object.headline }}&dates={{ object.start_date|date:"Ymd" }}/{{ object.end_date|date:"Ymd" }}{% if object.location %}&location={{ object.location }}{% endif %}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="//www.google.com/calendar/images/ext/gc_button6.gif"></a>
+    <span class="date">{{ object.start_date|date:"F j" }} - {{ object.end_date|date:"F j, Y" }}</span>
+      <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ object.headline }}&dates={{ object.start_date|date:"Ymd" }}/{{ object.end_date|date:"Ymd" }}{% if object.location %}&location={{ object.location }}{% endif %}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="//www.google.com/calendar/images/ext/gc_button2.gif"></a>
     </p>
     {% else %}
     <p>

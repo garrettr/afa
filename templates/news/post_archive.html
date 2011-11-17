@@ -1,15 +1,17 @@
+{% load static %}
 {% load feincms_thumbnail %}
 <div id="entry_archive">
   {% for post in latest|slice:":3" %}
   <div class="post">
     <a class="frame" href="{{ post.photo.file.url }}">
-      <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"100x100" }}' />
+      <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"120x120" }}' />
     </a>
     <h3>{{ post.headline }}</h3>
     {% if post.start_date and post.end_date %}
     <p>
-      <span class="date">{{ post.start_date|date:"F j, Y" }} - {{ post.end_date|date:"F j, Y" }}</span>
-      <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ post.headline }}&dates={{ post.start_date|date:"Ymd" }}/{{ post.end_date|date:"Ymd" }}{% if post.location %}&location={{ post.location }}{% endif %}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="//www.google.com/calendar/images/ext/gc_button6.gif"></a>
+      <a class="calendar" title="Add to Google Calendar" alt="Add to Google Calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ post.headline }}&dates={{ post.start_date|date:"Ymd" }}/{{ post.end_date|date:"Ymd" }}{% if post.location %}&location={{ post.location }}{% endif %}&sprop=website:www.theallianceforappalachia.org&sprop=name:The Alliance for Appalachia"><img src="{% get_static_prefix %}img/icon_calendar.gif">
+      <span class="date">{{ post.start_date|date:"F j" }} - {{ post.end_date|date:"F j, Y" }}</span>
+      </a>
     </p>
     {% else %}
     <p>
