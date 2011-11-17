@@ -3,9 +3,11 @@
 <div id="entry_archive">
   {% for post in latest|slice:":3" %}
   <div class="post">
+    {% if post.photo %}
     <a class="frame" href="{{ post.photo.file.url }}">
       <img class="snapshot newsleft" src='{{ post.photo.file|thumbnail:"120x120" }}' />
     </a>
+    {% endif %}
     <h3>{{ post.headline }}</h3>
     {% if post.start_date and post.end_date %}
     <p>
