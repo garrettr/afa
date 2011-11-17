@@ -22,6 +22,15 @@
 
     {{ object.body|safe }}
 
+    {% if object.location %}
+    <h2>Map</h2>
+    <p>
+      <a href="http://maps.google.com/maps?q={{ object.location|urlencode }}">
+        <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ object.location|urlencode }}&zoom=14&markers=color:blue%7Clabel:{{ object.headline|urlencode }}%7C{{ object.location|urlencode }}&size=400x300&sensor=false" alt="{{ object.location}}">
+      </a>
+    </p>
+    {% endif %}
+
     {% if object.media_files.all %}
     <h2>Downloads</h2>
     {% for media_file in object.media_files.all %}
