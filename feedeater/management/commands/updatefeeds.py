@@ -13,6 +13,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         feeds = Feed.objects.all()
         for f in feeds:
-            LOG.debug("Updating %s..." % f.title)
             f.update_entries()
-        LOG.debug("Done.")
