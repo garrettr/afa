@@ -89,9 +89,18 @@ class Feed(models.Model):
             req = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&grant_type=client_credentials" % (FACEBOOK_APP_ID, FACEBOOK_APP_TOKEN)
             token_request = urlopen(req).read()
             access_token = token_request[len("access_token="):] # token_request is "access_token=xxx..."
-            fbregx = re.match(
-                    r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
-                    self.url)
+            if "/pages/" in self.url:
+                # old-style page URL uses numeric id:
+                # http://www.facebook.com/pages/username/id
+                fbregx = re.match(
+                        r'(https?://www.facebook.com/pages/[a-zA-Z0-9\.]+/)?(?P<fbid>[0-9]+)',
+                        self.url)
+            else:
+                # if a page has the username set, it can be accessed with it
+                # http://www.facebook.com/usernmame
+                fbregx = re.match(
+                        r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
+                        self.url)
             fbid = fbregx.group('fbid')
             feed_url = "https://graph.facebook.com/%s/feed?access_token=%s" % (fbid, access_token)
             feed = loads(urlopen(feed_url).read())
@@ -246,9 +255,7 @@ class Feed(models.Model):
         '''
         if "twitter.com/" in self.url:
             return 'TW'
-        elif "facebook.com/" in self.url and "/feed/" not in self.url:
-            # facebok rss feeds are at www.facebook.com/feed/...
-            # should be processed as RSS
+        elif "facebook.com/" in self.url:
             return 'FB'
         else: # default try to process as RSS/Atom
             return 'RA'
@@ -260,9 +267,14 @@ class Feed(models.Model):
         '''
         image_url = None
         if self.source == 'FB':
-            fbregx = re.match(
-                    r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
-                    self.url)
+            if "/pages/" in self.url:
+                fbregx = re.match(
+                        r'(https?://www.facebook.com/pages/[a-zA-Z0-9\.]+/)?(?P<fbid>[0-9]+)',
+                        self.url)
+            else:
+                fbregx = re.match(
+                        r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
+                        self.url)
             fbid = fbregx.group('fbid')
             image_url = "https://graph.facebook.com/%s/picture" % (fbid)
         elif self.source == 'TW':
@@ -289,10 +301,7 @@ class Feed(models.Model):
             )
 
     def save(self, *args, **kwargs):
-        # figure out the feed source
         self.source = self._get_source()
-        # try to get an image to associate with the feed
         self._get_image()
         super(Feed, self).save(*args, **kwargs)
-        print "self.image.name: ", self.image.name
         self.update_entries()
