@@ -1,4 +1,4 @@
-<h2>{{ content.title }}</h2>
+{% if content.title %}<h2>{{ content.title }}</h2>{% endif %}
 
 {{ content.richtext|safe }}
 
