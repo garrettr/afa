@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load applicationcontent_tags feincms_tags feincms_page_tags %}
+{% load static %}
+
+{% block header %}
+<img src="{{ STATIC_URL }}img/header-how-we-work.jpg">
+{% endblock %}
+
+{% block content %}
+<div class="rtext">
+  <div class="block">
+    {% feincms_render_region feincms_page "main" request %}
+  </div>
+</div>
+{% endblock %}

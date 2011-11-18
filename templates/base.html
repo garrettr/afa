@@ -30,14 +30,20 @@
           {% endfor %}
         </div>
 
-        {% block header %}
         <div id="header">
+        {% block header %}
           <img src="{{ STATIC_URL }}img/header-no-split.jpg">
-        </div>
         {% endblock %}
+        </div>
 
         <div id="content"> 
-          {% block content %}{% endblock %}
+          {% block content %}
+          <div class="rtext">
+            <div class="block">
+              {% feincms_render_region feincms_page "main" request %}
+            </div>
+          </div>
+          {% endblock %}
         </div>
 
       </div>

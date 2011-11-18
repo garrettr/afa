@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load applicationcontent_tags feincms_tags feincms_page_tags %}
+{% load static %}
+
+{% block header %}
+<img src="{{ STATIC_URL }}img/header-history.jpg">
+{% endblock %}
+
+{% block content %}
+<div class="block rtext">
+    {% feincms_render_region feincms_page "main" request %}
+</div>
+{% endblock %}

@@ -2,43 +2,20 @@
 {% load applicationcontent_tags feincms_tags feincms_page_tags %}
 {% load static %}
 
+{% block header %}
+<img src="{{ STATIC_URL }}img/header-member-groups.jpg">
+{% endblock %}
+
 {% block content %}
-<div class="leftcol rtext">
-  <div class="block">
+<div class="rtext">
+  <div class="leftcol block">
     {% feincms_render_region feincms_page "main" request %}
   </div>
 </div>
 
 <div class="rightcol">
-  <div id="socialmedia" class="block">
-    <img class="ribbon" src="{% get_static_prefix %}img/socialmedia-ribbon.png">
-    {% load feedeater_tags %}
-    {% get_latest_entries %}
-    {% if latest_entries %}
-    <ol class="socialfeed">
-      {% for entry in latest_entries|slice:":5" %}
-      <li>
-      <p>
-      <a class="feed" href="{{ entry.feed.url }}">
-        {% if entry.feed.source == 'FB' %}<img src="{% get_static_prefix %}img/facebook_21.png" />{% endif %}
-        {% if entry.feed.source == 'TW' %}<img src="{% get_static_prefix %}img/twitter_21.png" />{% endif %}
-        {% if entry.feed.source == 'RA' %}<img src="{% get_static_prefix %}img/rss_21.png" />{% endif %}
-        {{ entry.feed.title }}
-      </a>
-      </p>
-      <p class="content">{{ entry.content|safe|truncatewords:20 }}</p>
-      <a class="readmore" href="{{ entry.url }}">Read More »</a>
-      <p>{{ entry.posted_on|date:"M j" }}</p>
-      </li>
-      {% endfor %}
-    </ol>
-    {% else %}
-    <p>There don't seem to be any recent entries.</p>
-    {% endif %}
-  </div>
-
   {% for content in feincms_page.content.sidebar %}
-  <div class="rtext block">
+  <div class="block">
     {% feincms_render_content content request %}
   </div>
   {% endfor %}
