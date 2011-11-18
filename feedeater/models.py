@@ -17,7 +17,7 @@ from urllib2 import urlopen
 from urlparse import urlparse
 from simplejson import loads
 
-import mylogging as LOG
+#import mylogging as LOG
 
 FACEBOOK_APP_ID = settings.FACEBOOK_APP_ID
 FACEBOOK_APP_TOKEN = settings.FACEBOOK_APP_TOKEN
