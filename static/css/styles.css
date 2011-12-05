@@ -98,6 +98,7 @@ li {
 #container {
    width: 960px;
    margin:0 auto;
+   padding-bottom:1em;
 }
 
 .block {
