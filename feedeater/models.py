@@ -72,79 +72,47 @@ class Feed(models.Model):
     def natural_key(self):
         return (self.title, self.url, self.source, self.image.name)
 
-    def update_entries(self):
+    def _update_facebook(self):
         '''
-        Copy all entries not saved to the database
-        Call on first model save to populate, and then again with cron job
+        Update self with the Facebook API
         '''
-        if self.source == 'FB':
-            # GET https://graph.facebook.com/oauth/access_token?client_id=YOUR_APP_ID&client_secret=YOUR_APP_SECRET&grant_type=client_credentials
-            # Returns access_token= in body of response.
-            # Now we can access a Page's wall like this:
-            # https://graph.facebook.com/pagename/feed?access_token=...
-            # returns JSON
-            # "data": [ list of posts to the wall]
-            # -> message, picture, created_time
-            # authenticate
-            req = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&grant_type=client_credentials" % (FACEBOOK_APP_ID, FACEBOOK_APP_TOKEN)
-            token_request = urlopen(req).read()
-            access_token = token_request[len("access_token="):] # token_request is "access_token=xxx..."
-            if "/pages/" in self.url:
-                # old-style page URL uses numeric id:
-                # http://www.facebook.com/pages/username/id
-                fbregx = re.match(
-                        r'(https?://www.facebook.com/pages/[a-zA-Z0-9\.]+/)?(?P<fbid>[0-9]+)',
-                        self.url)
-            else:
-                # if a page has the username set, it can be accessed with it
-                # http://www.facebook.com/usernmame
-                fbregx = re.match(
-                        r'(https?://www.facebook.com/)?(?P<fbid>[a-zA-Z0-9\.]{5,})',
-                        self.url)
-            fbid = fbregx.group('fbid')
-            feed_url = "https://graph.facebook.com/%s/feed?access_token=%s" % (fbid, access_token)
-            feed = loads(urlopen(feed_url).read())
+        # authenticate
+        req = ("https://graph.facebook.com/oauth/access_token?"
+               "client_id=%s&client_secret=%s&grant_type=client_credentials"
+               % (FACEBOOK_APP_ID, FACEBOOK_APP_TOKEN))
+        token_request = urlopen(req).read()
+        access_token = token_request[len("access_token="):] # token_request is "access_token=xxx..."
+        if "/pages/" in self.url:
+            # old-style page URL uses numeric id:
+            # http://www.facebook.com/pages/username/id
+            fbregx = re.match(
+                    r"(https?://www.facebook.com/pages/"
+                     "[a-zA-Z0-9\.]+/)?(?P<fbid>[0-9]+)",
+                    self.url)
+        else:
+            # if the page has a username set, it can be accessed with it
+            # http://www.facebook.com/usernmame
+            fbregx = re.match(
+                    r"(https?://www.facebook.com/)?"
+                     "(?P<fbid>[a-zA-Z0-9\.]{5,})",
+                    self.url)
+        fbid = fbregx.group('fbid')
+        feed_url = ("https://graph.facebook.com/"
+                    "%s/feed?access_token=%s"
+                    % (fbid, access_token))
+        feed = loads(urlopen(feed_url).read())
 
-            sorted_entries = self.entries.order_by('-posted_on') # https://docs.djangoproject.com/en/1.3/topics/db/queries/#following-relationships-backward
-            if sorted_entries:
-                # get most recent saved post
-                mr_saved = sorted_entries[0]
-                for post in feed['data']:
-                    post_time = datetime.strptime(
-                        post['created_time'],
-                        "%Y-%m-%dT%H:%M:%S+0000"
-                    )
-                    if post_time <= mr_saved.posted_on:
-                        # we've reached what's already been saved
-                        # NOTE: this assumes the input is sorted
-                        break
-                    else:
-                        # a new one! save it
-                        post_id = post['id'].split("_")[1]
-                        purl = "%s/posts/%s" % (self.url, post_id)
-                        try:
-                            e = Entry(
-                                    feed=self,
-                                    title=post['name'],
-                                    url=purl,
-                                    content=strip_tags(post['message']),
-                                    # example:
-                                    # "created_time": "2011-07-20T19:49:17+0000"
-                                    posted_on=datetime.strptime(
-                                        post['created_time'],
-                                        "%Y-%m-%dT%H:%M:%S+0000"
-                                    )
-                                )
-                            e.save()
-                        except KeyError:
-                            # sometimes there isn't a message param - I guess if it's
-                            # just a photo
-                            pass
-            else:
-                # this is the initial save - populate with all entries
-                for post in feed['data']:
-                    # data is a list of dictionaries, each describing a feed post
-                    # each posts id is of the format pageid_postid
+        try:
+            most_recent_saved = self.entries.order_by('-posted_on')[0]
+
+            for post in feed['data']:
+                post_time = datetime.strptime(
+                    post['created_time'],
+                    "%Y-%m-%dT%H:%M:%S+0000"
+                )
+                if post_time <= most_recent_saved.posted_on:
+                    break
+                else:
                     post_id = post['id'].split("_")[1]
                     purl = "%s/posts/%s" % (self.url, post_id)
                     try:
@@ -153,8 +121,6 @@ class Feed(models.Model):
                                 title=post['name'],
                                 url=purl,
                                 content=strip_tags(post['message']),
-                                # example:
-                                # "created_time": "2011-07-20T19:49:17+0000"
                                 posted_on=datetime.strptime(
                                     post['created_time'],
                                     "%Y-%m-%dT%H:%M:%S+0000"
@@ -162,80 +128,81 @@ class Feed(models.Model):
                             )
                         e.save()
                     except KeyError:
-                        # sometimes there isn't a message param - I guess if it's
-                        # just a photo
-                        pass
-
-        elif self.source == 'TW':
-            # Create an instance of the Twitter API with no-auth
-            # no authentication needed for public timelines
-            api = twitter.Api()
-            # match against this regex
-            # accepts http(s) full twitter url or just username
-            tregx = re.match(
-                    r'(https?://twitter.com/#!/){0,1}(?P<tid>[a-zA-Z0-9_]{1,15})',
-                    self.url)
-            tid = tregx.group('tid')
-            statuses = api.GetUserTimeline(tid)
-
-            sorted_entries = self.entries.order_by('-posted_on')
-            if sorted_entries:
-                # get most recent saved post
-                mr_saved = sorted_entries[0]
-                for status in statuses:
-                    post_time = datetime(*rfc822.parsedate(status.created_at)[:6])
-                    if post_time <= mr_saved.posted_on:
-                        break
-                    else:
-                        status_url = "%s/status/%s" % (self.url, status.id)
-                        e = Entry(
-                                feed=self,
-                                title=status.text,
-                                url=status_url,
-                                content=strip_tags(status.text),
-                                posted_on=datetime(*rfc822.parsedate(status.created_at)[:6])
-                            )
-                        e.save()
-            else:
-                # first model save - populate with all entries
-                for status in statuses:
-                    # build individual tweet URL
-                    # subject to change based on Twitter's URL scheme
-                    # worry about the first slash later
-                    # they will still work, just look bad
-                    status_url = "%s/status/%s" % (self.url, status.id)
+                        pass # some post types have no message key
+        except IndexError: # no Entry saved yet
+            for post in feed['data']:
+                # post['id'] = pageid_postid
+                post_id = post['id'].split("_")[1]
+                purl = "%s/posts/%s" % (self.url, post_id)
+                try:
                     e = Entry(
                             feed=self,
-                            title=status.text,
-                            url=status_url,
-                            content=strip_tags(status.text),
-                            posted_on=datetime(*rfc822.parsedate(status.created_at)[:6])
+                            title=post['name'],
+                            url=purl,
+                            content=strip_tags(post['message']),
+                            posted_on=datetime.strptime(
+                                post['created_time'],
+                                "%Y-%m-%dT%H:%M:%S+0000"
+                            )
                         )
                     e.save()
+                except KeyError:
+                    pass
 
-        elif self.source == 'RA':
-            d = feedparser.parse(self.url)
-            # download everything and save it
-            sorted_entries = self.entries.order_by('-posted_on')
-            if sorted_entries:
-                # get most recent saved post
-                mr_saved = sorted_entries[0]
-                for post in d.entries:
-                    post_time = datetime(*post.updated_parsed[:6])
-                    if post_time <= mr_saved.posted_on:
-                        break   # NOTE: this assumes the input is sorted
-                    else:
+    def _update_twitter(self):
+        # No authentication needed for public timelines
+        api = twitter.Api()
+        # accepts http(s) full twitter url or just username
+        tregx = re.match(
+                r'(https?://twitter.com/#!/){0,1}(?P<tid>[a-zA-Z0-9_]{1,15})',
+                self.url)
+        tid = tregx.group('tid')
+        tweets = api.GetUserTimeline(tid)
+
+        try:
+
+            most_recent_saved = self.entries.order_by('-posted_on')[0]
+
+            for tweet in tweets:
+                post_time = datetime(*rfc822.parsedate(tweet.created_at)[:6])
+                if post_time <= most_recent_saved.posted_on:
+                    break
+                else:
+                    try:
                         e = Entry(
                                 feed=self,
-                                title=post.title,
-                                url=post.link,
-                                content=strip_tags(post.summary),
-                                posted_on=datetime(*post.updated_parsed[:6])
+                                title=tweet.text,
+                                url="%s/status/%s" % (self.url, tweet.id),
+                                content=strip_tags(tweet.text),
+                                posted_on=post_time
                             )
                         e.save()
-            else:
-                # first save - populate with all entries
-                for post in d.entries:
+                    except KeyError:
+                        pass
+                    
+        except IndexError: # no Entry saved yet
+
+            for tweet in tweets:
+                post_time = datetime(*rfc822.parsedate(tweet.created_at)[:6])
+                e = Entry(
+                        feed=self,
+                        title=tweet.text,
+                        url="%s/status/%s" % (self.url, tweet.id),
+                        content=strip_tags(tweet.text),
+                        posted_on=post_time
+                    )
+                e.save()
+
+    def _update_rssatom(self):
+        d = feedparser.parse(self.url)
+        try:
+            most_recent_saved = self.entries.order_by('-posted_on')[0]
+
+            for post in d.entries:
+                post_time = datetime(*post.updated_parsed[:6])
+                if post_time <= most_recent_saved.posted_on:
+                    break
+                else:
                     e = Entry(
                             feed=self,
                             title=post.title,
@@ -245,9 +212,28 @@ class Feed(models.Model):
                         )
                     e.save()
 
-        else:
-            print "I don't recognize that source type."
-            # This should never happen - handle properly later
+        except IndexError: # no Entry saved
+            for post in d.entries:
+                e = Entry(
+                        feed=self,
+                        title=post.title,
+                        url=post.link,
+                        content=strip_tags(post.summary),
+                        posted_on=datetime(*post.updated_parsed[:6])
+                    )
+                e.save()
+
+    def update_entries(self):
+        '''
+        Copy all entries not saved to the database
+        Call on first model save to populate, and then again with cron job
+        '''
+        if self.source == 'FB':
+            self._update_facebook()
+        if self.source == 'TW':
+            self._update_twitter()
+        if self.source == 'RA':
+            self._update_rssatom()
 
     def _get_source(self):
         '''
@@ -289,8 +275,6 @@ class Feed(models.Model):
             self.image = None # or set to a default?
             return
         
-        # do shit with image_url
-        # supposed to use ContentFile?
         image_data = urlopen(image_url)
         filename = urlparse(image_data.geturl()).path.split('/')[-1]
         self.image = filename
