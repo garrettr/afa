@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.simple import direct_to_template, redirect_to
+
 import os
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^feeds/', include('feedeater.urls')),
     url(r'^snippets/', include('snippets.urls')),
 
+    url(r'^timeline/$', direct_to_template, { 'template': 'timeline.html' },
+        name="timeline"),
 )
 
 # development media-serving URLs

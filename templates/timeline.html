@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- CSS -->
+        <link href="{% get_static_prefix %}timeline/timeline.css" rel="stylesheet">
+
+        <!-- JavaScript -->
+        <script type="text/javascript" src="{% get_static_prefix %}timeline/jquery-min.js"></script>
+        <script type="text/javascript" src="{% get_static_prefix %}timeline/timeline-min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                var timeline = new VMM.Timeline();
+                timeline.init("https://docs.google.com/spreadsheet/pub?key=0AnYQyQJGk4R5dF90T2NOYURwem5pbXhnV05jdUotVGc&output=html");
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="timeline"></div>
+    </body>
+</html>
